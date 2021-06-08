@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-app" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-app/beck-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-service/beck-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-service/beck-quartz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/beck-service/beck-system" charset="UTF-8" />
+  </component>
+</project>
