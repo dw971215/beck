@@ -216,6 +216,19 @@
                 <version>${beck.version}</version>
             </dependency>
 
+            <!--串口通信模块-->
+            <dependency>
+                <groupId>com.dw</groupId>
+                <artifactId>beck-serial</artifactId>
+                <version>${beck.version}</version>
+            </dependency>
+
+            <!--外部服务提供接口-->
+            <dependency>
+                <groupId>com.dw</groupId>
+                <artifactId>beck-api</artifactId>
+                <version>${beck.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
