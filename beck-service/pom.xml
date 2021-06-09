@@ -18,5 +18,6 @@
         <module>beck-system</module>
         <module>beck-quartz</module>
         <module>beck-generator</module>
+        <module>beck-serial</module>
     </modules>
 </project>

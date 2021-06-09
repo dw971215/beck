@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>beck-service</artifactId>
+        <groupId>com.dw</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>beck-serial</artifactId>
+
+    <description>
+        windows直连UART串口通信服务
+    </description>
+
+    <dependencies>
+
+        <!--串口通信依赖jar-->
+        <dependency>
+            <groupId>rxtx</groupId>
+            <artifactId>RxtxCommon</artifactId>
+            <version>${beck.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/RXTXcomm.jar</systemPath>
+        </dependency>
+
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-common</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

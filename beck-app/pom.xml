@@ -16,6 +16,7 @@
 
     <modules>
         <module>beck-admin</module>
+        <module>beck-api</module>
     </modules>
 
 </project>
