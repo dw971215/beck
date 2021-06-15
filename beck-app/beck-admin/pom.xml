@@ -79,12 +79,6 @@
             <groupId>com.dw</groupId>
             <artifactId>beck-serial</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.dw</groupId>
-            <artifactId>beck-api</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
