@@ -53,7 +53,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.0.8</version>
+            <version>${mysqlconnect.version}</version>
         </dependency>
 
         <!-- 核心模块-->
@@ -70,11 +70,7 @@
             <artifactId>beck-generator</artifactId>
         </dependency>
 
-        <!--串口通信模块-->
-        <dependency>
-            <groupId>com.dw</groupId>
-            <artifactId>beck-serial</artifactId>
-        </dependency>
+
     </dependencies>
 
     <build>
