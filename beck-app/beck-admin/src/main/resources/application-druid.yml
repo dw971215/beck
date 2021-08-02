@@ -1,12 +1,21 @@
 # 数据源配置
 spring:
+    mail:
+        username: 2841604570@qq.com  # 邮箱地址
+        password: gnazmmexrarkdccd    # SMTP|POP3|IMAP协议授权码
+        host: smtp.qq.com        # 服务器地址。参考邮箱服务运营商提供的信息。
+        properties:
+            mail:
+                smtp:
+                    auth: true         # 开启smtp协议验证
+        port: 587
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
+        driverClassName: com.mysql.cj.jdbc.Driver
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://localhost:3306/beck?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                url: jdbc:mysql://118.31.1.246:3306/beck?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8
                 username: root
                 password: root
             # 从库数据源

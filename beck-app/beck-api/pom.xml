@@ -16,6 +16,12 @@
     </description>
 
     <dependencies>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlconnect.version}</version>
+        </dependency>
         <!-- swagger2-->
         <!--防止进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本-->
         <dependency>
@@ -37,6 +43,15 @@
         <dependency>
             <groupId>com.dw</groupId>
             <artifactId>beck-serial</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-framework</artifactId>
+        </dependency>
+        <!-- 定时任务-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-quartz</artifactId>
         </dependency>
     </dependencies>
 
