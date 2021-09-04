@@ -1,13 +1,5 @@
-package com.beck.quartz.controller;
+package com.beck.api.controller.job;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.beck.common.annotation.Log;
 import com.beck.common.core.controller.BaseController;
 import com.beck.common.core.domain.AjaxResult;
@@ -16,12 +8,17 @@ import com.beck.common.enums.BusinessType;
 import com.beck.common.utils.poi.ExcelUtil;
 import com.beck.quartz.domain.SysJobLog;
 import com.beck.quartz.service.ISysJobLogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 调度日志操作处理
  */
 @RestController
-@RequestMapping("/monitor/jobLog")
+@RequestMapping("/api/monitor/jobLog")
 public class SysJobLogController extends BaseController
 {
     @Autowired

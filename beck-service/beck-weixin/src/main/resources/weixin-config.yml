@@ -1,0 +1,15 @@
+# 微信所有的配置参数
+weixin:
+  AppID: wxb3330aeb5d89663a
+  AppSecret: 9ec256358d3ba69475012957d794587b
+  #测试公众号信息
+test:
+  AppID: wxd1da3a447f4f190f
+  AppSecret: b1f8f5c644f0d410e2dc389ef4695b64
+
+
+
+
+
+
+
