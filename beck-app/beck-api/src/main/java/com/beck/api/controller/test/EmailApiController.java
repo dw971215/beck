@@ -1,4 +1,4 @@
-package com.beck.api.controller;
+package com.beck.api.controller.test;
 
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.utils.article.LoveUtils;

@@ -1,7 +1,7 @@
 # 项目相关配置
 beck:
   # 名称
-  name: Beck-Api
+  name: Beck-WeiXin
   # 版本
   version: 1.0.0
   # 版权年份
@@ -17,8 +17,8 @@ beck:
 
 # 开发环境配置
 server:
-  # 服务器的HTTP端口，默认为8080
-  port: 8280
+  # 服务器的HTTP端口
+  port: 8199
   servlet:
     # 应用的访问路径
     context-path: /

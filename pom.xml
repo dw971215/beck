@@ -224,6 +224,13 @@
                 <version>${beck.version}</version>
             </dependency>
 
+            <!--微信功能模块-->
+            <dependency>
+                <groupId>com.dw</groupId>
+                <artifactId>beck-weixin</artifactId>
+                <version>${beck.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

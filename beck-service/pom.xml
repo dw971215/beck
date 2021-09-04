@@ -19,5 +19,6 @@
         <module>beck-quartz</module>
         <module>beck-generator</module>
         <module>beck-serial</module>
+        <module>beck-weixin</module>
     </modules>
 </project>
