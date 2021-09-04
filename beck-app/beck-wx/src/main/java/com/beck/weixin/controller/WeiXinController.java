@@ -21,11 +21,11 @@ public class WeiXinController extends WeiXinBaseController {
 
     @RequestMapping(value = "list")
     public String  test(HttpServletRequest request, HttpServletResponse response){
-//        String accessToken = OauthApi.getAccessToken(weiXinConfig.getAppID(), weiXinConfig.getAppSecret());
+//        String accessToken = OauthApi.getAccessToken(weiXinConfig.getTestAppID(), weiXinConfig.getTestAppSecret());
         String resMsg = "";
         String urlMsg = "";
         try {
-             urlMsg = QRCodeApi.createQRCodeImage(weiXinConfig.getAppID(), weiXinConfig.getAppSecret(),
+             urlMsg = QRCodeApi.createQRCodeImage(weiXinConfig.getTestAppID(), weiXinConfig.getTestAppSecret(),
                     123456, WXQRCodeConstant.QRCodeTypeEnum.QR_SCENE, WXQRCodeConstant.EXPIRE_SECONDS);
              resMsg = UrlOperationUtil.downLoad(urlMsg, "公众号二维码", response);
         } catch (IOException e) {
