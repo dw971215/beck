@@ -28,7 +28,7 @@ public class OauthApi  extends WXBaseCore {
      * @param appSecret
      * @return
      */
-    public static String getAccessToken(String appId, String appSecret) {
+    public static synchronized String getAccessToken(String appId, String appSecret) {
 
         if (redisCache.hasKey(WXRedisConstant.ACCESS_TOKEN_KEY + appId)) {
             return redisCache.getCacheObject(WXRedisConstant.ACCESS_TOKEN_KEY + appId);
