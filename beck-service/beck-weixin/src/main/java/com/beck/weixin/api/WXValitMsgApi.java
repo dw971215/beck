@@ -24,6 +24,11 @@ public class WXValitMsgApi extends ApiServlet {
 
     private static Logger logger = LoggerFactory.getLogger(WXValitMsgApi.class);
 
+    /**
+     * 开发者接入
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "")
     public void accept(HttpServletRequest request, HttpServletResponse response){
         try {
