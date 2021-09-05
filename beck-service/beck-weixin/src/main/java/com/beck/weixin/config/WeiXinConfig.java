@@ -56,6 +56,7 @@ public class WeiXinConfig {
     public String getValitUrl() {
         return valitUrl;
     }
+
     public String getValitToken() {
         return valitToken;
     }
