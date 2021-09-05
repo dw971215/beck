@@ -89,6 +89,12 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
 
+        <!--xml解析依赖-->
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+        </dependency>
+
         <!--Token生成与解析-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

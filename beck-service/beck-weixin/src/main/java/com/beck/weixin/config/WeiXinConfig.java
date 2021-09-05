@@ -31,6 +31,12 @@ public class WeiXinConfig {
     @Value("${test.AppSecret}")
     private String testAppSecret;
 
+    @Value("${valit.url}")
+    private String valitUrl;
+
+    @Value("${valit.token}")
+    private String valitToken;
+
     public String getAppID() {
         return AppID;
     }
@@ -47,4 +53,10 @@ public class WeiXinConfig {
         return testAppSecret;
     }
 
+    public String getValitUrl() {
+        return valitUrl;
+    }
+    public String getValitToken() {
+        return valitToken;
+    }
 }
