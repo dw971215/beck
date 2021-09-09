@@ -29,6 +29,16 @@ server:
     max-threads: 800
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
+    #存放日志路径
+    basedir: /usr/local/java/logs/beck
+    accesslog:
+      pattern: common
+      enabled: true
+      directory: logs
+      prefix: api_access_log
+      suffix: .log
+      request-attributes-enabled: true
+      rename-on-rotate: true
 
 # 日志配置
 logging:
