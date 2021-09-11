@@ -5,7 +5,6 @@ import com.beck.weixin.constant.WXQRCodeConstant;
 import com.beck.weixin.core.WeiXinBaseApi;
 import com.beck.weixin.core.qrcode.QRCodeApi;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
