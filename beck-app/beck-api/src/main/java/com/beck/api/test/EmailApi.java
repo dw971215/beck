@@ -1,4 +1,4 @@
-package com.beck.api.controller.test;
+package com.beck.api.test;
 
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.utils.article.LoveUtils;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api
 @RequestMapping(value = "/api/mail")
-public class EmailApiController {
+public class EmailApi {
 
     /**
      * 发送邮件

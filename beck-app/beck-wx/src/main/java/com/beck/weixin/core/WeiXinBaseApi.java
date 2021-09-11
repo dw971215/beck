@@ -1,5 +1,6 @@
 package com.beck.weixin.core;
 
+import com.beck.common.core.redis.RedisCache;
 import com.beck.common.utils.spring.SpringUtils;
 import com.beck.weixin.config.WeiXinConfig;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date 2021/9/2 17:20
  */
 @RequestMapping(value = "/weiXinServer")
-public class WeiXinBaseController {
+public class WeiXinBaseApi {
 
     /**
      * 微信配置类
      */
     public WeiXinConfig weiXinConfig = SpringUtils.getBean(WeiXinConfig.class);
+
+    /**
+     * 缓存工具类
+     */
+    public RedisCache redisCache = SpringUtils.getBean(RedisCache.class);
 
 
 }

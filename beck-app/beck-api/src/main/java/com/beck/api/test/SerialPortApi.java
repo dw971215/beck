@@ -1,4 +1,4 @@
-package com.beck.api.controller.test;
+package com.beck.api.test;
 
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.serial.domain.LedSerailPortReceived;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api
 @RestController
 @RequestMapping("/api/led")
-public class SerialPortController {
+public class SerialPortApi {
 
 
     /**

@@ -1,11 +1,11 @@
-package com.beck.weixin.controller;
+package com.beck.weixin.api;
 
 import com.beck.common.utils.UrlOperationUtil;
 import com.beck.weixin.constant.WXQRCodeConstant;
-import com.beck.weixin.core.WeiXinBaseController;
+import com.beck.weixin.core.WeiXinBaseApi;
 import com.beck.weixin.core.qrcode.QRCodeApi;
-import com.beck.weixin.core.token.OauthApi;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +17,9 @@ import java.io.IOException;
  * @Date 2021/9/2 17:16
  */
 @RestController
-public class WeiXinController extends WeiXinBaseController {
+public class WeiXinApi extends WeiXinBaseApi {
 
-    @RequestMapping(value = "list")
+    @RequestMapping(value = "/list")
     public String  test(HttpServletRequest request, HttpServletResponse response){
 //        String accessToken = OauthApi.getAccessToken(weiXinConfig.getTestAppID(), weiXinConfig.getTestAppSecret());
         String resMsg = "";
