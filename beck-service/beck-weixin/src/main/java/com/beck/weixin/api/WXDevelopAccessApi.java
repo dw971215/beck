@@ -15,14 +15,15 @@ import java.io.IOException;
 
 /**
  * 验证微信消息真实性api
+ * 开发者接入
  * @Author dawei
  * @Date 2021/9/5 14:07
  */
 @RestController
-@RequestMapping("/weiXinServer/valitMsg")
-public class WXValitMsgApi extends ApiServlet {
+@RequestMapping("/weiXinServer/developAccess")
+public class WXDevelopAccessApi extends ApiServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(WXValitMsgApi.class);
+    private static Logger logger = LoggerFactory.getLogger(WXDevelopAccessApi.class);
 
     /**
      * 开发者接入
