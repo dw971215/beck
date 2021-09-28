@@ -12,7 +12,7 @@ public class WXApiUrlConstant {
 
 
     /**
-     * 微信请求获取token地址
+     * 微信请求获取基本token地址
      */
     public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token";
 
@@ -25,4 +25,14 @@ public class WXApiUrlConstant {
      * 显示微信二维码地址
      */
     public final static String show_qrcode_url = "https://mp.weixin.qq.com/cgi-bin/showqrcode";
+
+    /**
+     * 微信网页授权获取的access_token地址
+     */
+    public final static String web_access_token_url = " https://api.weixin.qq.com/sns/oauth2/access_token";
+
+    /**
+     * 微信网页授权拉取用户信息地址
+     */
+    public final static String web_getUserInfo_url = "https://api.weixin.qq.com/sns/userinfo";
 }

@@ -4,6 +4,7 @@ import com.beck.common.utils.UrlOperationUtil;
 import com.beck.weixin.constant.WXQRCodeConstant;
 import com.beck.weixin.core.WeiXinBaseApi;
 import com.beck.weixin.core.qrcode.QRCodeApi;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
  * @Author dawei
  * @Date 2021/9/2 17:16
  */
+@Api
 @RestController
 public class WeiXinApi extends WeiXinBaseApi {
 
