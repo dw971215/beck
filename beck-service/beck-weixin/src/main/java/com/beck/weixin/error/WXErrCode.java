@@ -69,6 +69,10 @@ public class WXErrCode {
             case "48001":
                 msg =  "api 功能未授权，请确认公众号已获得该接口，可以在公众平台官网 - 开发者中心页中查看接口权限";
                 break;
+            case "50002":
+                msg =  "用户受限，可能是违规后接口被封禁";
+                break;
+
 
             default:
                 msg = "未知错误，请联系管理员";

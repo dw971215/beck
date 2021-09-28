@@ -23,7 +23,7 @@ import java.util.Map;
 public class UrlOperationUtil {
 
     public static String downLoad(String orgUrl,String name,HttpServletResponse response) throws IOException {
-        if(!orgUrl.startsWith("http://") || !orgUrl.startsWith("https://")){
+        if(!orgUrl.startsWith("http://") && !orgUrl.startsWith("https://")){
             return "请校验网络地址是否正确！";
         }
         OutputStream os = null;
