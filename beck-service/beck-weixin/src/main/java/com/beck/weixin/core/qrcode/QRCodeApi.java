@@ -9,7 +9,7 @@ import com.beck.weixin.error.WXErrCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.HashMap;
-import static com.beck.common.utils.UrlOperationUtil.buildReqUrl;
+import static com.beck.common.utils.UrlUtil.buildReqUrl;
 
 /**
  * 生成公众号二维码图片

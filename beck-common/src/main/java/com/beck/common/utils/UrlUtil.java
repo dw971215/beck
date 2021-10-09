@@ -20,7 +20,7 @@ import java.util.Map;
  * @Author dawei
  * @Date 2021/2/1 11:06
  */
-public class UrlOperationUtil {
+public class UrlUtil {
 
     public static String downLoad(String orgUrl,String name,HttpServletResponse response) throws IOException {
         if(!orgUrl.startsWith("http://") && !orgUrl.startsWith("https://")){
