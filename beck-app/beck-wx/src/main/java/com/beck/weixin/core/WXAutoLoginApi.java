@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WXAutoLoginApi extends WeiXinBaseApi{
 
+    /**
+     * H5网页授权登录
+     * @param code
+     * @return
+     */
     @GetMapping(value = "/wxAutoLogin")
     public AjaxResult index(@ApiParam(name = "code",value = "code",required = true) String code){
         String userInfo = WebOauthApi.getUserInfo(weiXinConfig.getTestAppID(), weiXinConfig.getTestAppSecret(), code);
