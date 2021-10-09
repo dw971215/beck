@@ -8,7 +8,7 @@ test:
   AppSecret: b1f8f5c644f0d410e2dc389ef4695b64
 #验证微信消息真实性
 valit:
-  url:
+  url: /weiXinServer/developAccess
   token: dw971215
 
 
