@@ -1,4 +1,4 @@
-package com.beck.weixin.core.webauth;
+package com.beck.weixin.core.auth;
 
 import com.alibaba.fastjson.JSONObject;
 import com.beck.common.utils.StringUtils;
@@ -14,17 +14,46 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 微信网页授权获取Api
+ * 微信授权获取工具
  * @Author dawei
  * @Date 2021/9/2 17:39
  */
 @Component
-public class WebOauthApi extends WXBaseCore {
+public class OauthApi extends WXBaseCore {
 
-   private static Logger logger = LoggerFactory.getLogger(WebOauthApi.class);
+   private static Logger logger = LoggerFactory.getLogger(OauthApi.class);
 
     /**
-     * 获取网页授权请求信息token
+     * 获取微信请求Token
+     * @param appId
+     * @param appSecret
+     * @return
+     */
+    public static synchronized String getAccessToken(String appId, String appSecret) {
+
+        if (redisCache.hasKey(WXRedisConstant.ACCESS_TOKEN_KEY + appId)) {
+            return redisCache.getCacheObject(WXRedisConstant.ACCESS_TOKEN_KEY + appId);
+        }
+        StringBuilder params = new StringBuilder();
+        params.append("grant_type=client_credential");
+        params.append("&appid=" + appId);
+        params.append("&secret=" + appSecret);
+        String result = HttpUtils.sendGet(WXApiUrlConstant.access_token_url, params.toString());
+        JSONObject TokenResult = JSONObject.parseObject(result);
+        String access_token = TokenResult.getString("access_token");
+        if (StringUtils.isNotBlank(access_token)) {
+            logger.info("获取access_token成功");
+            redisCache.setCacheObject(WXRedisConstant.ACCESS_TOKEN_KEY + appId, access_token,
+                    WXRedisConstant.ACCESS_TOKEN_EXPIRE, TimeUnit.MINUTES);
+            return TokenResult.getString("access_token");
+        }
+        String errMsg = WXErrCode.WXErrMsg(TokenResult);
+        logger.info(errMsg);
+        return errMsg;
+    }
+
+    /**
+     * 获取网页授权请求信息
      * @param appId
      * @param appSecret
      * @param code 请求凭证
@@ -76,6 +105,31 @@ public class WebOauthApi extends WXBaseCore {
         String errMsg = WXErrCode.WXErrMsg(resultJson);
         logger.info(errMsg);
         return errMsg;
+    }
+
+    /**
+     * 获取小程序授权key 和openid
+     * GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
+     * @param appId
+     * @param appSecret
+     * @param code
+     * @return
+     */
+    public static synchronized JSONObject getSessionKeyOrOpenId(String appId, String appSecret,String code) {
+        StringBuilder params = new StringBuilder();
+        params.append("appid=" + appId);
+        params.append("&secret=" + appSecret);
+        params.append("&js_code=" + code);
+        params.append("&grant_type=authorization_code");
+        String result = HttpUtils.sendGet(WXApiUrlConstant.app_getUserInfo_url, params.toString());
+        JSONObject resultJson = JSONObject.parseObject(result);
+        String openid = resultJson.getString("openid");
+        if (StringUtils.isNotBlank(openid)) {
+            return resultJson;
+        }
+        String errMsg = WXErrCode.WXErrMsg(resultJson);
+        logger.info(errMsg);
+        return new JSONObject();
     }
 
 }

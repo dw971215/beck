@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.beck.common.utils.http.HttpUtils;
 import com.beck.weixin.constant.WXQRCodeConstant;
 import com.beck.weixin.constant.WXApiUrlConstant;
-import com.beck.weixin.core.token.OauthApi;
+import com.beck.weixin.core.auth.OauthApi;
 import com.beck.weixin.error.WXErrCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

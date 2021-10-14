@@ -35,4 +35,9 @@ public class WXApiUrlConstant {
      * 微信网页授权拉取用户信息地址
      */
     public final static String web_getUserInfo_url = "https://api.weixin.qq.com/sns/userinfo";
+
+    /**
+     * 微信小程序获取授权用户信息
+     */
+    public final static String app_getUserInfo_url = "https://api.weixin.qq.com/sns/jscode2session";
 }

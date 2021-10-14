@@ -20,5 +20,11 @@
             <artifactId>beck-common</artifactId>
         </dependency>
 
+        <!--微信返回的个人信息解密-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.56</version>
+        </dependency>
     </dependencies>
 </project>

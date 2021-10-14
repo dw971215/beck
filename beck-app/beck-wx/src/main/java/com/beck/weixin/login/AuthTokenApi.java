@@ -1,4 +1,4 @@
-package com.beck.weixin.core;
+package com.beck.weixin.login;
 
 import com.alibaba.fastjson.JSONObject;
 import com.beck.common.core.domain.AjaxResult;
@@ -6,6 +6,7 @@ import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.uuid.IdUtils;
 import com.beck.weixin.constant.WXApiAuthConstant;
 import com.beck.weixin.constant.WXHttpStatus;
+import com.beck.weixin.core.WeiXinBaseApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

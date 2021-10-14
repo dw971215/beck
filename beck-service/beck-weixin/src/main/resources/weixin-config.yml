@@ -6,10 +6,15 @@ weixin:
 test:
   AppID: wxd1da3a447f4f190f
   AppSecret: b1f8f5c644f0d410e2dc389ef4695b64
-#验证微信消息真实性
+#验证微信消息真实性开发者接入
 valit:
   url: /weiXinServer/developAccess
   token: dw971215
+#维信小程序接入
+wxApplet:
+  AppId: wx9c352a6148d7753d
+  AppSecret: 5dba8fb15a504e75bd8c8247af5b8971
+
 
 
 

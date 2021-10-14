@@ -37,6 +37,13 @@ public class WeiXinConfig {
     @Value("${valit.token}")
     private String valitToken;
 
+    //微信小程序
+    @Value("${wxApplet.AppId}")
+    private String WxAppletAppId;
+
+    @Value("${wxApplet.AppSecret}")
+    private String WxAppletAppSecret;
+
     public String getAppID() {
         return AppID;
     }
@@ -59,5 +66,13 @@ public class WeiXinConfig {
 
     public String getValitToken() {
         return valitToken;
+    }
+
+    public String getWxAppletAppId() {
+        return WxAppletAppId;
+    }
+
+    public String getWxAppletAppSecret() {
+        return WxAppletAppSecret;
     }
 }
