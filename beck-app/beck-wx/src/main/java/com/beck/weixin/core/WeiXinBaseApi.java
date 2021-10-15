@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * 微信请求基本配置数据
  * @Author dawei
  * @Date 2021/9/2 17:20
  */

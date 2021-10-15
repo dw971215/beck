@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class WXUtlis {
 
     /**
-     *
+     *  解密微信加密用户信息数据
      * @param encryptedData 加密数据
      * @param sessionKey 验证的
      * @param iv

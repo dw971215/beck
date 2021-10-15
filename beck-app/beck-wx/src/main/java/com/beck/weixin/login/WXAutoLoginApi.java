@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 微信自动登录接口
+ * 微信自动授权获取用户信息接口
  * @Author dawei
  * @Date 2021/9/22 11:31
  */
@@ -36,12 +36,13 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
      * @param code
      * @return
      */
-    @GetMapping(value = "/wxAppletAutoLogin")
+    @GetMapping(value = "/wxAppAutoLogin")
     public AjaxResult wxAppletAutoLogin(@ApiParam(name = "code",value = "临时授权code",required = true) String code,
                                         @ApiParam(name = "iv",value = "加密算法的初始向量",required = true) String iv,
                                         @ApiParam(name = "encryptedData",value = "包括敏感数据在内的完整用户信息的加密数据",required = true) String encryptedData){
         JSONObject sessionKeyOrOpenId = OauthApi.getSessionKeyOrOpenId(weiXinConfig.getWxAppletAppId(), weiXinConfig.getWxAppletAppSecret(), code);
         JSONObject object = WXUtlis.dencryptedUserData(encryptedData, sessionKeyOrOpenId.getString("session_key"), iv);
+        logger.info("userInfo message:"+object.toJSONString());
         return AjaxResult.success(object);
     }
 }
