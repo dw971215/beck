@@ -24,7 +24,7 @@ public class WXUtlis {
      * @param iv
      * @return
      */
-    public static JSONObject dencryptedUserData(String encryptedData, String sessionKey, String iv) {
+    public static JSONObject dencryptedUserData(String encryptedData, String sessionKey, String iv) throws Exception{
         JSONObject res = new JSONObject();
         // 被加密的数据
         byte[] dataByte = Base64.decode(encryptedData);
@@ -32,7 +32,6 @@ public class WXUtlis {
         byte[] keyByte = Base64.decode(sessionKey);
         // 偏移量
         byte[] ivByte = Base64.decode(iv);
-        try {
             int base = 16;
             if (keyByte.length % base != 0) {
                 int groups = keyByte.length / base + (keyByte.length % base != 0 ? 1 : 0);
@@ -53,9 +52,6 @@ public class WXUtlis {
                 String result = new String(resultByte, "UTF-8");
                 return JSON.parseObject(result);
             }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
         return null;
     }
 }

@@ -70,6 +70,11 @@
             <artifactId>beck-generator</artifactId>
         </dependency>
 
+        <!--业务模块-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-business</artifactId>
+        </dependency>
 
     </dependencies>
 

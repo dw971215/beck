@@ -20,5 +20,6 @@
         <module>beck-generator</module>
         <module>beck-serial</module>
         <module>beck-weixin</module>
+        <module>beck-business</module>
     </modules>
 </project>

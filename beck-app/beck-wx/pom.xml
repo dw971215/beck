@@ -11,7 +11,7 @@
 
     <artifactId>beck-wx</artifactId>
     <description>微信功能模块</description>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <dependencies>
 
@@ -42,6 +42,11 @@
         <dependency>
             <groupId>com.dw</groupId>
             <artifactId>beck-framework</artifactId>
+        </dependency>
+        <!--业务模块-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-business</artifactId>
         </dependency>
 
     </dependencies>

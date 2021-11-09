@@ -238,6 +238,12 @@
                 <artifactId>beck-weixin</artifactId>
                 <version>${beck.version}</version>
             </dependency>
+            <!--业务模块-->
+            <dependency>
+                <groupId>com.dw</groupId>
+                <artifactId>beck-business</artifactId>
+                <version>${beck.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
