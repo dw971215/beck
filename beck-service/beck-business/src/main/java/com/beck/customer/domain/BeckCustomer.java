@@ -45,6 +45,9 @@ public class BeckCustomer extends BaseEntity
     @Excel(name = "微信用户小程序唯一标识")
     private String wxOpenid;
 
+    @Excel(name = "用户来源")
+    private String customerSource;
+
     public void setId(String id) 
     {
         this.id = id;
@@ -118,6 +121,14 @@ public class BeckCustomer extends BaseEntity
         return wxOpenid;
     }
 
+    public String getCustomerSource() {
+        return customerSource;
+    }
+
+    public void setCustomerSource(String customerSource) {
+        this.customerSource = customerSource;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -134,6 +145,7 @@ public class BeckCustomer extends BaseEntity
             .append("nickName", getNickName())
             .append("mobile", getMobile())
             .append("wxOpenid", getWxOpenid())
+            .append("customerSource", getCustomerSource())
             .toString();
     }
 }

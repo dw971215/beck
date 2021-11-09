@@ -46,6 +46,7 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     @Override
     public List<BeckCustomer> selectBeckCustomerList(BeckCustomer beckCustomer)
     {
+        beckCustomer.setDelFlag("0");
         return beckCustomerMapper.selectBeckCustomerList(beckCustomer);
     }
 
@@ -84,7 +85,7 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     @Override
     public int deleteBeckCustomerByIds(String[] ids)
     {
-        return beckCustomerMapper.deleteBeckCustomerByIds(ids);
+        return beckCustomerMapper.deleteByLogicByIds(ids);
     }
 
     /**
@@ -96,6 +97,6 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     @Override
     public int deleteBeckCustomerById(String id)
     {
-        return beckCustomerMapper.deleteBeckCustomerById(id);
+        return beckCustomerMapper.deleteByLogicById(id);
     }
 }

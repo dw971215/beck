@@ -1,6 +1,9 @@
 package com.beck.web.controller.business;
 
 import java.util.List;
+
+import com.beck.common.utils.sign.Md5Utils;
+import com.beck.common.utils.uuid.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +79,8 @@ public class BeckCustomerController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BeckCustomer beckCustomer)
     {
+        beckCustomer.setId(UUID.randomUUID().toString());
+        beckCustomer.setLoginPassword(Md5Utils.hash("111111"));
         return toAjax(beckCustomerService.insertBeckCustomer(beckCustomer));
     }
 

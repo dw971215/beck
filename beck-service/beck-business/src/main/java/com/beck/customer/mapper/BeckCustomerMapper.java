@@ -59,10 +59,23 @@ public interface BeckCustomerMapper
     public int deleteBeckCustomerById(String id);
 
     /**
+     * 逻辑删除单条记录
+     * @param id
+     * @return
+     */
+    public int deleteByLogicById(String id);
+    /**
      * 批量删除用户
      * 
      * @param ids 需要删除的数据ID
      * @return 结果
      */
     public int deleteBeckCustomerByIds(String[] ids);
+
+    /**
+     * 逻辑删除多条记录
+     * @param ids
+     * @return
+     */
+    public int deleteByLogicByIds(String[] ids);
 }

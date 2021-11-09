@@ -68,6 +68,7 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 insertCustom.setLoginPassword(Md5Utils.hash("111111"));
                 insertCustom.setNickName(userInfo.getString("nickName"));
                 insertCustom.setWxOpenid(openid);
+                insertCustom.setCustomerSource("1");
                 customerService.insertBeckCustomer(insertCustom);
                 res = insertCustom;
             }else{
