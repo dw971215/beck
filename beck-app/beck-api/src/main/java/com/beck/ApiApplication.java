@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 /**
  * 启动程序
  */
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication( scanBasePackages = {"com.beck.**"},exclude = { DataSourceAutoConfiguration.class })
 public class ApiApplication
 {
     public static void main(String[] args)

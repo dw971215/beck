@@ -1,4 +1,4 @@
-package com.beck.api.controller.job;
+package com.beck.web.controller.monitor;
 
 import com.beck.common.annotation.Log;
 import com.beck.common.core.controller.BaseController;
@@ -18,7 +18,7 @@ import java.util.List;
  * 调度日志操作处理
  */
 @RestController
-@RequestMapping("/api/monitor/jobLog")
+@RequestMapping("/monitor/jobLog")
 public class SysJobLogController extends BaseController
 {
     @Autowired

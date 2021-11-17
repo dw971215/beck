@@ -23,10 +23,10 @@ public class SerialPortInit implements CommandLineRunner {
 
     @Override
     public void run(String... args){
-//        try {
-//          SerialPortUtils.connect(new LedSerailPortReceived());
-//        } catch (Exception e) {
-//          logger.info("Error:--> 串口信息连接或接收消息错误！");
-//        }
+        try {
+          SerialPortUtils.connect(new LedSerailPortReceived());
+        } catch (Exception e) {
+          logger.info("Error:--> 串口信息连接或接收消息错误！");
+        }
     }
 }
