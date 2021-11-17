@@ -1,6 +1,8 @@
 package com.beck.weixin.login;
 
 import com.alibaba.fastjson.JSONObject;
+import com.beck.assets.domain.BeckCustomerAssets;
+import com.beck.assets.service.IBeckCustomerAssetsService;
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.sign.Md5Utils;
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
 /**
  * 微信自动授权获取用户信息接口
  * @Author dawei
@@ -27,6 +31,9 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
 
     @Autowired
     private IBeckCustomerService customerService;
+
+    @Autowired
+    private IBeckCustomerAssetsService beckCustomerAssetsService;
     /**
      * H5网页授权登录
      * @param code
@@ -70,6 +77,14 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 insertCustom.setWxOpenid(openid);
                 insertCustom.setCustomerSource("1");
                 customerService.insertBeckCustomer(insertCustom);
+                //创建完成后给用户插入一条资产记录
+                BeckCustomerAssets beckCustomerAssets = new BeckCustomerAssets();
+                beckCustomerAssets.setBalance(BigDecimal.ZERO);
+                beckCustomerAssets.setCurrentValue(100L);
+                beckCustomerAssets.setMemberLevel(1);
+                beckCustomerAssets.setPointNum(10L);
+                beckCustomerAssets.setUser(new BeckCustomer(insertCustom.getId()));
+                beckCustomerAssetsService.insertBeckCustomerAssets(beckCustomerAssets);
                 res = insertCustom;
             }else{
                 beckCustomer.setNickName(userInfo.getString("nickName"));

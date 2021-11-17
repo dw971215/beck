@@ -103,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
-//                .antMatchers("/api/**").anonymous()
+                .antMatchers("/api/**").anonymous()
                 .antMatchers("/weiXinServer/**").anonymous()
                 .antMatchers("/profile/**").anonymous()
                 .antMatchers("/common/download**").anonymous()

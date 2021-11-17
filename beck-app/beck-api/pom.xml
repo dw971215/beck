@@ -54,6 +54,12 @@
             <groupId>com.dw</groupId>
             <artifactId>beck-quartz</artifactId>
         </dependency>
+
+        <!--业务模块-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-business</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

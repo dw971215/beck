@@ -2,6 +2,8 @@ package com.beck.customer.service.impl;
 
 import java.util.List;
 import com.beck.common.utils.DateUtils;
+import com.beck.common.utils.sign.Md5Utils;
+import com.beck.common.utils.uuid.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beck.customer.mapper.BeckCustomerMapper;
@@ -60,6 +62,8 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     public int insertBeckCustomer(BeckCustomer beckCustomer)
     {
         beckCustomer.setCreateTime(DateUtils.getNowDate());
+        beckCustomer.setId(UUID.randomUUID().toString());
+        beckCustomer.setLoginPassword(Md5Utils.hash("111111"));
         return beckCustomerMapper.insertBeckCustomer(beckCustomer);
     }
 

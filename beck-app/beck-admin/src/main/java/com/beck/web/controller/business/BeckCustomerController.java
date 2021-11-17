@@ -79,8 +79,6 @@ public class BeckCustomerController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BeckCustomer beckCustomer)
     {
-        beckCustomer.setId(UUID.randomUUID().toString());
-        beckCustomer.setLoginPassword(Md5Utils.hash("111111"));
         return toAjax(beckCustomerService.insertBeckCustomer(beckCustomer));
     }
 

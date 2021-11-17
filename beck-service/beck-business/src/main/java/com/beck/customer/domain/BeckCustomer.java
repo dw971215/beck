@@ -37,6 +37,14 @@ public class BeckCustomer extends BaseEntity
     @Excel(name = "用户昵称")
     private String nickName;
 
+    /*真实姓名*/
+    @Excel(name = "真实姓名")
+    private String realName;
+
+    /*性别*/
+    @Excel(name = "性别")
+    private String gender;
+
     /** 手机号码 */
     @Excel(name = "手机号码")
     private String mobile;
@@ -129,6 +137,29 @@ public class BeckCustomer extends BaseEntity
         this.customerSource = customerSource;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public BeckCustomer(String id) {
+        this.id = id;
+    }
+
+    public BeckCustomer() {
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -146,6 +177,8 @@ public class BeckCustomer extends BaseEntity
             .append("mobile", getMobile())
             .append("wxOpenid", getWxOpenid())
             .append("customerSource", getCustomerSource())
+            .append("realName", getRealName())
+            .append("gender", getGender())
             .toString();
     }
 }

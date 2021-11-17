@@ -42,6 +42,8 @@ public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
+    private static final boolean logOpen = false;
+
     // 配置织入点
     @Pointcut("@annotation(com.beck.common.annotation.Log)")
     public void logPointCut()
@@ -56,7 +58,10 @@ public class LogAspect
     @AfterReturning(pointcut = "logPointCut()", returning = "jsonResult")
     public void doAfterReturning(JoinPoint joinPoint, Object jsonResult)
     {
-        handleLog(joinPoint, null, jsonResult);
+        if(logOpen){
+            handleLog(joinPoint, null, jsonResult);
+        }
+
     }
 
     /**
@@ -68,7 +73,9 @@ public class LogAspect
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e)
     {
-        handleLog(joinPoint, e, null);
+       if(logOpen){
+           handleLog(joinPoint, e, null);
+       }
     }
 
     protected void handleLog(final JoinPoint joinPoint, final Exception e, Object jsonResult)

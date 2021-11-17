@@ -129,3 +129,6 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+#api基础路径
+apiPath: /api

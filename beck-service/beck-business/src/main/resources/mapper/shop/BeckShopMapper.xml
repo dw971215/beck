@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beck.shop.mapper.BeckShopMapper">
+    
+    <resultMap type="BeckShop" id="BeckShopResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="shopName"    column="shop_name"    />
+        <result property="areaCode"    column="area_code"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="address"    column="address"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="outDoorPhoto"    column="out_door_photo"    />
+        <result property="isOpen"    column="is_open"    />
+        <result property="minPrice"    column="min_price"    />
+        <result property="packingFee"    column="packing_fee"    />
+        <result property="deliveryCost"    column="delivery_cost"    />
+    </resultMap>
+
+    <sql id="selectBeckShopVo">
+        select id, create_by, create_time, update_by, update_time, remark, del_flag, shop_name, area_code, mobile, address, longitude, latitude, out_door_photo, is_open, min_price, packing_fee,
+         delivery_cost from beck_shop
+    </sql>
+
+    <select id="selectBeckShopList" parameterType="BeckShop" resultMap="BeckShopResult">
+        <include refid="selectBeckShopVo"/>
+        <where>  
+            <if test="shopName != null  and shopName != ''"> and shop_name like concat('%', #{shopName}, '%')</if>
+            <if test="areaCode != null  and areaCode != ''"> and area_code = #{areaCode}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
+            <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
+            <if test="outDoorPhoto != null  and outDoorPhoto != ''"> and out_door_photo = #{outDoorPhoto}</if>
+            <if test="isOpen != null  and isOpen != ''"> and is_open = #{isOpen}</if>
+            <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
+            <if test="minPrice != null "> and min_price = #{minPrice}</if>
+            <if test="packingFee != null "> and packing_fee = #{packingFee}</if>
+            <if test="deliveryCost != null "> and delivery_cost = #{deliveryCost}</if>
+        </where>
+    </select>
+    
+    <select id="selectBeckShopById" parameterType="String" resultMap="BeckShopResult">
+        <include refid="selectBeckShopVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBeckShop" parameterType="BeckShop">
+        insert into beck_shop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="shopName != null">shop_name,</if>
+            <if test="areaCode != null">area_code,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="address != null">address,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="outDoorPhoto != null">out_door_photo,</if>
+            <if test="isOpen != null">is_open,</if>
+            <if test="minPrice != null">min_price,</if>
+            <if test="packingFee != null">packing_fee,</if>
+            <if test="deliveryCost != null">delivery_cost,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="shopName != null">#{shopName},</if>
+            <if test="areaCode != null">#{areaCode},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="address != null">#{address},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="outDoorPhoto != null">#{outDoorPhoto},</if>
+            <if test="isOpen != null">#{isOpen},</if>
+            <if test="minPrice != null">#{minPrice},</if>
+            <if test="packingFee != null">#{packingFee},</if>
+            <if test="deliveryCost != null">#{deliveryCost},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBeckShop" parameterType="BeckShop">
+        update beck_shop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="shopName != null">shop_name = #{shopName},</if>
+            <if test="areaCode != null">area_code = #{areaCode},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="outDoorPhoto != null">out_door_photo = #{outDoorPhoto},</if>
+            <if test="isOpen != null">is_open = #{isOpen},</if>
+            <if test="minPrice != null">min_price = #{minPrice},</if>
+            <if test="packingFee != null">packing_fee = #{packingFee},</if>
+            <if test="deliveryCost != null">delivery_cost = #{deliveryCost},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeckShopById" parameterType="String">
+        delete from beck_shop where id = #{id}
+    </delete>
+
+    <delete id="deleteBeckShopByIds" parameterType="String">
+        delete from beck_shop where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByLogicById" parameterType="String">
+       UPDATE beck_shop SET
+			del_flag = '1'
+		WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByLogicByIds" parameterType="String">
+        UPDATE beck_shop SET
+        del_flag = '1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
