@@ -37,10 +37,10 @@
             <version>1.5.21</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.dw</groupId>
             <artifactId>beck-serial</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.dw</groupId>
             <artifactId>beck-framework</artifactId>
@@ -61,6 +61,7 @@
                 <version>2.1.1.RELEASE</version>
                 <configuration>
                     <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
                 <executions>
                     <execution>
