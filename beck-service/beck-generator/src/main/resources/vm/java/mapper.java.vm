@@ -61,6 +61,23 @@ public interface ${ClassName}Mapper
      * @return 结果
      */
     public int delete${ClassName}ByIds(${pkColumn.javaType}[] ${pkColumn.javaField}s);
+
+    /**
+     * 逻辑删除${functionName}
+     *
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return 结果
+     */
+    public int deleteByLogic${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 逻辑批量删除${functionName}
+     *
+     * @param ${pkColumn.javaField}s 需要删除的数据ID
+     * @return 结果
+     */
+    public int deleteByLogic${ClassName}ByIds(${pkColumn.javaType}[] ${pkColumn.javaField}s);
+
 #if($table.sub)
 
     /**

@@ -87,6 +87,7 @@ public class ${ClassName}Controller extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ${ClassName} ${className})
     {
+        ${className}.setId(UUID.randomUUID().toString());
         return toAjax(${className}Service.insert${ClassName}(${className}));
     }
 

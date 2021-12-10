@@ -52,6 +52,11 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
     @Override
     public List<${ClassName}> select${ClassName}List(${ClassName} ${className})
     {
+#foreach ($column in $columns)
+#if($column.javaField == 'delFlag')
+        ${className}.setDelFlag("0");
+#end
+#end
         return ${className}Mapper.select${ClassName}List(${className});
     }
 
@@ -70,6 +75,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #foreach ($column in $columns)
 #if($column.javaField == 'createTime')
         ${className}.setCreateTime(DateUtils.getNowDate());
+#end
+#if($column.javaField == 'delFlag')
+        ${className}.setDelFlag("0");
 #end
 #end
 #if($table.sub)
@@ -120,7 +128,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #if($table.sub)
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}s(${pkColumn.javaField}s);
 #end
-        return ${className}Mapper.delete${ClassName}ByIds(${pkColumn.javaField}s);
+        return ${className}Mapper.deleteByLogic${ClassName}ByIds(${pkColumn.javaField}s);
     }
 
     /**
@@ -135,7 +143,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #if($table.sub)
         ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
 #end
-        return ${className}Mapper.delete${ClassName}ById(${pkColumn.javaField});
+        return ${className}Mapper.deleteByLogic${ClassName}ById(${pkColumn.javaField});
     }
 #if($table.sub)
 

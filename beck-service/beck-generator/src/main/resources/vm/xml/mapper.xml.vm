@@ -106,12 +106,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from ${tableName} where ${pkColumn.columnName} = #{${pkColumn.javaField}}
     </delete>
 
+    <update id="deleteByLogic${ClassName}ById" parameterType="${pkColumn.javaType}">
+      UPDATE ${tableName} SET del_flag = '1' WHERE ${pkColumn.columnName} = #{${pkColumn.javaField}}
+    </update>
+
     <delete id="delete${ClassName}ByIds" parameterType="String">
         delete from ${tableName} where ${pkColumn.columnName} in 
         <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
             #{${pkColumn.javaField}}
         </foreach>
     </delete>
+
+    <update id="deleteByLogic${ClassName}ByIds" parameterType="String">
+        UPDATE  ${tableName} SET del_flag = '1' where ${pkColumn.columnName} in
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{${pkColumn.javaField}}
+        </foreach>
+    </update>
 #if($table.sub)
     
     <delete id="delete${subClassName}By${subTableFkClassName}s" parameterType="String">
