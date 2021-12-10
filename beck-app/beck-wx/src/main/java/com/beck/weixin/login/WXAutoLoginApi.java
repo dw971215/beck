@@ -1,6 +1,8 @@
 package com.beck.weixin.login;
 
 import com.alibaba.fastjson.JSONObject;
+import com.beck.address.domain.BeckCustomerAddress;
+import com.beck.address.service.IBeckCustomerAddressService;
 import com.beck.assets.domain.BeckCustomerAssets;
 import com.beck.assets.service.IBeckCustomerAssetsService;
 import com.beck.common.core.domain.AjaxResult;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 微信自动授权获取用户信息接口
@@ -34,6 +38,9 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
 
     @Autowired
     private IBeckCustomerAssetsService beckCustomerAssetsService;
+
+    @Autowired
+    private IBeckCustomerAddressService beckCustomerAddressService;
     /**
      * H5网页授权登录
      * @param code
@@ -80,17 +87,25 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 customerService.insertBeckCustomer(insertCustom);
                 //创建完成后给用户插入一条资产记录
                 BeckCustomerAssets beckCustomerAssets = new BeckCustomerAssets();
+                beckCustomerAssets.setId(UUID.randomUUID().toString());
                 beckCustomerAssets.setBalance(BigDecimal.ZERO);
                 beckCustomerAssets.setCurrentValue(100L);
                 beckCustomerAssets.setMemberLevel(1);
                 beckCustomerAssets.setPointNum(10L);
                 beckCustomerAssets.setUser(new BeckCustomer(insertCustom.getId()));
                 beckCustomerAssetsService.insertBeckCustomerAssets(beckCustomerAssets);
+                insertCustom.setBeckCustomerAssets(beckCustomerAssets);
                 res = insertCustom;
             }else{
                 beckCustomer.setNickName(userInfo.getString("nickName"));
                 beckCustomer.setLoginPhoto(userInfo.getString("avatarUrl"));
                 customerService.updateBeckCustomer(beckCustomer);
+                //获取用户地址
+                BeckCustomerAddress beckCustomerAddress = new BeckCustomerAddress();
+                beckCustomerAddress.setUser(new BeckCustomer(beckCustomer.getId()));
+                List<BeckCustomerAddress> beckCustomerAddresses = new ArrayList<>();
+                beckCustomerAddresses = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
+                beckCustomer.setBeckCustomerAddresses(beckCustomerAddresses);
                 res = beckCustomer;
             }
             logger.info("userInfo message:"+userInfo.toJSONString());

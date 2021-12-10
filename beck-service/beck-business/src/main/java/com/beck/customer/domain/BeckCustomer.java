@@ -1,9 +1,15 @@
 package com.beck.customer.domain;
 
+import com.beck.address.domain.BeckCustomerAddress;
+import com.beck.assets.domain.BeckCustomerAssets;
 import com.beck.common.annotation.Excel;
 import com.beck.common.core.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 beck_customer
@@ -55,6 +61,17 @@ public class BeckCustomer extends BaseEntity
 
     @Excel(name = "用户来源")
     private String customerSource;
+
+    @Excel(name = "生日")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+
+    @Excel(name = "用户资产")
+    private BeckCustomerAssets beckCustomerAssets;
+    /**
+     * 用户地址
+     */
+    private List<BeckCustomerAddress> beckCustomerAddresses;
 
     public void setId(String id) 
     {
@@ -153,11 +170,35 @@ public class BeckCustomer extends BaseEntity
         this.gender = gender;
     }
 
+    public BeckCustomerAssets getBeckCustomerAssets() {
+        return beckCustomerAssets;
+    }
+
+    public void setBeckCustomerAssets(BeckCustomerAssets beckCustomerAssets) {
+        this.beckCustomerAssets = beckCustomerAssets;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public BeckCustomer(String id) {
         this.id = id;
     }
 
     public BeckCustomer() {
+    }
+
+    public List<BeckCustomerAddress> getBeckCustomerAddresses() {
+        return beckCustomerAddresses;
+    }
+
+    public void setBeckCustomerAddresses(List<BeckCustomerAddress> beckCustomerAddresses) {
+        this.beckCustomerAddresses = beckCustomerAddresses;
     }
 
     @Override
@@ -179,6 +220,7 @@ public class BeckCustomer extends BaseEntity
             .append("customerSource", getCustomerSource())
             .append("realName", getRealName())
             .append("gender", getGender())
+            .append("birthday",getBirthday())
             .toString();
     }
 }

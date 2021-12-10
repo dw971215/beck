@@ -1,6 +1,8 @@
 package com.beck.web.controller.business;
 
 import java.util.List;
+
+import com.beck.common.utils.uuid.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,6 +78,7 @@ public class BeckCustomerAssetsController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BeckCustomerAssets beckCustomerAssets)
     {
+        beckCustomerAssets.setId(UUID.randomUUID().toString());
         return toAjax(beckCustomerAssetsService.insertBeckCustomerAssets(beckCustomerAssets));
     }
 

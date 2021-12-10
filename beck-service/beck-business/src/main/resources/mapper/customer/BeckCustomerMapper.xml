@@ -21,41 +21,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="mobile"    column="mobile"    />
         <result property="wxOpenid"    column="wx_openid"    />
         <result property="customerSource"    column="customer_source" />
+        <result property="birthday"    column="birthday" />
+    </resultMap>
+
+    <resultMap type="BeckCustomer" id="BeckCustomerAndAssetsResult" extends="BeckCustomerResult">
+        <result property="beckCustomerAssets.id"    column="bid"    />
+        <result property="beckCustomerAssets.createBy"    column="bcreate_by"    />
+        <result property="beckCustomerAssets.createTime"    column="bcreate_time"    />
+        <result property="beckCustomerAssets.updateBy"    column="bupdate_by"    />
+        <result property="beckCustomerAssets.updateTime"    column="bupdate_time"    />
+        <result property="beckCustomerAssets.remark"    column="bremark"    />
+        <result property="beckCustomerAssets.delFlag"    column="bdel_flag"    />
+        <result property="beckCustomerAssets.pointNum"    column="point_num"    />
+        <result property="beckCustomerAssets.balance"    column="balance"    />
+        <result property="beckCustomerAssets.currentValue"    column="current_value"    />
+        <result property="beckCustomerAssets.memberLevel"    column="member_level"    />
     </resultMap>
 
     <sql id="selectBeckCustomerVo">
-        select id, create_by, create_time, update_by, update_time, remark, del_flag, login_name, login_password, login_photo, nick_name, mobile, wx_openid
-        ,customer_source,
-        real_name,
-        gender
-        from beck_customer
+        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.login_name, a.login_password, a.login_photo, a.nick_name, a.mobile, a.wx_openid
+        ,a.customer_source,
+        a.birthday,
+        a.real_name,
+        a.gender,
+        b.id as bid,
+        b.create_by as bcreate_by,
+        b.create_time as bcreate_time,
+        b.update_by as bupdate_by,
+        b.update_time as bupdate_time,
+        b.remark as bremark,
+        b.del_flag as bdel_flag,
+        b.point_num,
+        b.balance,
+        b.current_value,
+        b.member_level
+        from beck_customer a
     </sql>
 
-    <select id="selectBeckCustomerList" parameterType="BeckCustomer" resultMap="BeckCustomerResult">
+    <sql id="tableJoins">
+        LEFT JOIN beck_customer_assets b on b.user_id = a.id
+    </sql>
+
+    <select id="selectBeckCustomerList" parameterType="BeckCustomer" resultMap="BeckCustomerAndAssetsResult">
         <include refid="selectBeckCustomerVo"/>
+        <include refid="tableJoins"/>
         <where>  
-            <if test="loginName != null  and loginName != ''"> and login_name like concat('%', #{loginName}, '%')</if>
-            <if test="loginPassword != null  and loginPassword != ''"> and login_password = #{loginPassword}</if>
-            <if test="loginPhoto != null  and loginPhoto != ''"> and login_photo = #{loginPhoto}</if>
-            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
-            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
-            <if test="wxOpenid != null  and wxOpenid != ''"> and wx_openid = #{wxOpenid}</if>
-            <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
-            <if test="customerSource != null  and customerSource != ''"> and customer_source = #{customerSource}</if>
-            <if test="realName != null  and realName != ''"> and real_name = #{realName}</if>
-            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="loginName != null  and loginName != ''"> and a.login_name like concat('%', #{loginName}, '%')</if>
+            <if test="loginPassword != null  and loginPassword != ''"> and a.login_password = #{loginPassword}</if>
+            <if test="loginPhoto != null  and loginPhoto != ''"> and a.login_photo = #{loginPhoto}</if>
+            <if test="nickName != null  and nickName != ''"> and a.nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and a.mobile = #{mobile}</if>
+            <if test="wxOpenid != null  and wxOpenid != ''"> and a.wx_openid = #{wxOpenid}</if>
+            <if test="delFlag != null  and delFlag != ''"> and a.del_flag = #{delFlag}</if>
+            <if test="customerSource != null  and customerSource != ''"> and a.customer_source = #{customerSource}</if>
+            <if test="realName != null  and realName != ''"> and a.real_name = #{realName}</if>
+            <if test="gender != null  and gender != ''"> and a.gender = #{gender}</if>
 
         </where>
     </select>
     
-    <select id="selectBeckCustomerById" parameterType="String" resultMap="BeckCustomerResult">
+    <select id="selectBeckCustomerById" parameterType="String" resultMap="BeckCustomerAndAssetsResult">
         <include refid="selectBeckCustomerVo"/>
-        where id = #{id}
+        <include refid="tableJoins"/>
+        where a.id = #{id}
     </select>
 
-    <select id="selectBeckCustomerByOpenId" parameterType="String" resultMap="BeckCustomerResult">
+    <select id="selectBeckCustomerByOpenId" parameterType="String" resultMap="BeckCustomerAndAssetsResult">
         <include refid="selectBeckCustomerVo"/>
-        where wx_openid = #{openid} and del_flag = '0'
+        <include refid="tableJoins"/>
+        where a.wx_openid = #{openid} and a.del_flag = '0'
     </select>
         
     <insert id="insertBeckCustomer" parameterType="BeckCustomer">
@@ -77,6 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerSource != null">customer_source,</if>
             <if test="realName != null">real_name,</if>
             <if test="gender != null">gender,</if>
+            <if test="birthday != null">birthday,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -95,6 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerSource != null">#{customerSource},</if>
             <if test="realName != null">#{realName},</if>
             <if test="gender != null">#{gender},</if>
+            <if test="birthday != null">#{birthday},</if>
+
          </trim>
     </insert>
 
@@ -116,6 +153,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="customerSource != null">customer_source = #{customerSource},</if>
             <if test="realName != null">real_name = #{realName},</if>
             <if test="gender != null">gender = #{gender},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
         </trim>
         where id = #{id}
     </update>

@@ -57,7 +57,6 @@ public class BeckCustomerAssetsServiceImpl implements IBeckCustomerAssetsService
     public int insertBeckCustomerAssets(BeckCustomerAssets beckCustomerAssets)
     {
         beckCustomerAssets.setCreateTime(DateUtils.getNowDate());
-        beckCustomerAssets.setId(UUID.randomUUID().toString());
         beckCustomerAssets.setDelFlag("0");
         return beckCustomerAssetsMapper.insertBeckCustomerAssets(beckCustomerAssets);
     }
