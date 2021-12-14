@@ -161,6 +161,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
             List<${subClassName}> list = new ArrayList<${subClassName}>();
             for (${subClassName} ${subclassName} : ${subclassName}List)
             {
+                ${subclassName}.setId(UUID.randomUUID().toString());
                 ${subclassName}.set${subTableFkClassName}(${pkColumn.javaField});
                 list.add(${subclassName});
             }

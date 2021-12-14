@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beck.specs.mapper.BeckGoodSpecsCategoryMapper">
+    
+    <resultMap type="BeckGoodSpecsCategory" id="BeckGoodSpecsCategoryResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="name"    column="name"    />
+        <result property="sort"    column="sort"    />
+    </resultMap>
+
+    <resultMap id="BeckGoodSpecsCategoryBeckGoodSpecsPropertyResult" type="BeckGoodSpecsCategory" extends="BeckGoodSpecsCategoryResult">
+        <collection property="beckGoodSpecsPropertyList" notNullColumn="sub_id" javaType="java.util.List" resultMap="BeckGoodSpecsPropertyResult" />
+    </resultMap>
+
+    <resultMap type="BeckGoodSpecsProperty" id="BeckGoodSpecsPropertyResult">
+        <result property="id"    column="sub_id"    />
+        <result property="createBy"    column="sub_create_by"    />
+        <result property="createTime"    column="sub_create_time"    />
+        <result property="updateBy"    column="sub_update_by"    />
+        <result property="updateTime"    column="sub_update_time"    />
+        <result property="remark"    column="sub_remark"    />
+        <result property="delFlag"    column="sub_del_flag"    />
+        <result property="name"    column="sub_name"    />
+        <result property="code"    column="sub_code"    />
+        <result property="isDefault"    column="sub_is_default"    />
+        <result property="sort"    column="sub_sort"    />
+        <result property="specsCategoryId"    column="sub_specs_category_id"    />
+    </resultMap>
+
+    <sql id="selectBeckGoodSpecsCategoryVo">
+        select id, create_by, create_time, update_by, update_time, remark, del_flag, name, sort from beck_good_specs_category
+    </sql>
+
+    <select id="selectBeckGoodSpecsCategoryList" parameterType="BeckGoodSpecsCategory" resultMap="BeckGoodSpecsCategoryResult">
+        <include refid="selectBeckGoodSpecsCategoryVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectBeckGoodSpecsCategoryById" parameterType="String" resultMap="BeckGoodSpecsCategoryBeckGoodSpecsPropertyResult">
+        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.name, a.sort,
+            b.id as sub_id, b.create_by as sub_create_by, b.create_time as sub_create_time, b.update_by as sub_update_by, b.update_time as sub_update_time, b.remark as sub_remark, b.del_flag as sub_del_flag, b.name as sub_name, b.code as sub_code, b.is_default as sub_is_default, b.sort as sub_sort, b.specs_category_id as sub_specs_category_id
+        from beck_good_specs_category a
+        left join beck_good_specs_property b on b.specs_category_id = a.id
+        where a.id = #{id}
+    </select>
+        
+    <insert id="insertBeckGoodSpecsCategory" parameterType="BeckGoodSpecsCategory">
+        insert into beck_good_specs_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="name != null">name,</if>
+            <if test="sort != null">sort,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="name != null">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBeckGoodSpecsCategory" parameterType="BeckGoodSpecsCategory">
+        update beck_good_specs_category
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeckGoodSpecsCategoryById" parameterType="String">
+        delete from beck_good_specs_category where id = #{id}
+    </delete>
+
+    <update id="deleteByLogicBeckGoodSpecsCategoryById" parameterType="String">
+      UPDATE beck_good_specs_category SET del_flag = '1' WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBeckGoodSpecsCategoryByIds" parameterType="String">
+        delete from beck_good_specs_category where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="deleteByLogicBeckGoodSpecsCategoryByIds" parameterType="String">
+        UPDATE  beck_good_specs_category SET del_flag = '1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    
+    <delete id="deleteBeckGoodSpecsPropertyBySpecsCategoryIds" parameterType="String">
+        delete from beck_good_specs_property where specs_category_id in 
+        <foreach item="specsCategoryId" collection="array" open="(" separator="," close=")">
+            #{specsCategoryId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteBeckGoodSpecsPropertyBySpecsCategoryId" parameterType="Long">
+        delete from beck_good_specs_property where specs_category_id = #{specsCategoryId}
+    </delete>
+
+    <insert id="batchBeckGoodSpecsProperty">
+        insert into beck_good_specs_property( id, create_by, create_time, update_by, update_time, remark, del_flag, name, code, is_default, sort, specs_category_id) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.createBy}, #{item.createTime}, #{item.updateBy}, #{item.updateTime}, #{item.remark}, #{item.delFlag}, #{item.name}, #{item.code}, #{item.isDefault}, #{item.sort}, #{item.specsCategoryId})
+        </foreach>
+    </insert>
+</mapper>
