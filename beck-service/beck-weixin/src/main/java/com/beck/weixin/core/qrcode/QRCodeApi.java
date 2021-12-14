@@ -46,7 +46,7 @@ public class QRCodeApi {
 
         scene.put("scene",scene_id);
         param.put("action_info",scene);
-        String qrResult = HttpUtils.sendPost(WXApiUrlConstant.create_qrcode_url + access_token, param.toJSONString());
+        String qrResult = HttpUtils.sendPost(WXApiUrlConstant.CREATE_QRCODE_URL + access_token, param.toJSONString());
         //根据返回的ticket 获取图片网络地址
         JSONObject object = JSONObject.parseObject(qrResult);
         if(object.get("ticket")!=null){
@@ -65,7 +65,7 @@ public class QRCodeApi {
     public static String showQRCodeImage(String ticket){
         HashMap<String,String> param = new HashMap<>();
         param.put("ticket",ticket);
-        String url = buildReqUrl(WXApiUrlConstant.show_qrcode_url,param);
+        String url = buildReqUrl(WXApiUrlConstant.SHOW_QRCODE_URL,param);
         return url;
     }
 

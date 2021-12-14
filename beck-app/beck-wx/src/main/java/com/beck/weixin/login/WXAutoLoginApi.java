@@ -39,8 +39,6 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
     @Autowired
     private IBeckCustomerAssetsService beckCustomerAssetsService;
 
-    @Autowired
-    private IBeckCustomerAddressService beckCustomerAddressService;
     /**
      * H5网页授权登录
      * @param code
@@ -101,11 +99,11 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 beckCustomer.setLoginPhoto(userInfo.getString("avatarUrl"));
                 customerService.updateBeckCustomer(beckCustomer);
                 //获取用户地址
-                BeckCustomerAddress beckCustomerAddress = new BeckCustomerAddress();
-                beckCustomerAddress.setUser(new BeckCustomer(beckCustomer.getId()));
-                List<BeckCustomerAddress> beckCustomerAddresses = new ArrayList<>();
-                beckCustomerAddresses = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
-                beckCustomer.setBeckCustomerAddresses(beckCustomerAddresses);
+//                BeckCustomerAddress beckCustomerAddress = new BeckCustomerAddress();
+//                beckCustomerAddress.setUser(new BeckCustomer(beckCustomer.getId()));
+//                List<BeckCustomerAddress> beckCustomerAddresses = new ArrayList<>();
+//                beckCustomerAddresses = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
+//                beckCustomer.setBeckCustomerAddresses(beckCustomerAddresses);
                 res = beckCustomer;
             }
             logger.info("userInfo message:"+userInfo.toJSONString());

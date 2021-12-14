@@ -38,7 +38,7 @@ public class OauthApi extends WXBaseCore {
         params.append("grant_type=client_credential");
         params.append("&appid=" + appId);
         params.append("&secret=" + appSecret);
-        String result = HttpUtils.sendGet(WXApiUrlConstant.access_token_url, params.toString());
+        String result = HttpUtils.sendGet(WXApiUrlConstant.ACCESS_TOKEN_URL, params.toString());
         JSONObject TokenResult = JSONObject.parseObject(result);
         String access_token = TokenResult.getString("access_token");
         if (StringUtils.isNotBlank(access_token)) {
@@ -72,7 +72,7 @@ public class OauthApi extends WXBaseCore {
         params.append("&secret=" + appSecret);
         params.append("&code=" + code);
         params.append("&grant_type=authorization_code");
-        String result = HttpUtils.sendGet(WXApiUrlConstant.web_access_token_url, params.toString());
+        String result = HttpUtils.sendGet(WXApiUrlConstant.WEB_ACCESS_TOKEN_URL, params.toString());
         JSONObject TokenResult = JSONObject.parseObject(result);
         String access_token = TokenResult.getString("access_token");
         if (StringUtils.isNotBlank(access_token)) {
@@ -96,7 +96,7 @@ public class OauthApi extends WXBaseCore {
         params.append("access_token=" + access_token);
         params.append("&openid=" + openid);
         params.append("&lang=zh_CN");
-        String result = HttpUtils.sendGet(WXApiUrlConstant.web_getUserInfo_url, params.toString());
+        String result = HttpUtils.sendGet(WXApiUrlConstant.WEB_GETUSERINFO_URL, params.toString());
         JSONObject resultJson = JSONObject.parseObject(result);
         String nickname = resultJson.getString("nickname");
         if (StringUtils.isNotBlank(nickname)) {
@@ -121,7 +121,7 @@ public class OauthApi extends WXBaseCore {
         params.append("&secret=" + appSecret);
         params.append("&js_code=" + code);
         params.append("&grant_type=authorization_code");
-        String result = HttpUtils.sendGet(WXApiUrlConstant.app_getUserInfo_url, params.toString());
+        String result = HttpUtils.sendGet(WXApiUrlConstant.APP_GETUSERINFO_URL, params.toString());
         JSONObject resultJson = JSONObject.parseObject(result);
         String openid = resultJson.getString("openid");
         if (StringUtils.isNotBlank(openid)) {
