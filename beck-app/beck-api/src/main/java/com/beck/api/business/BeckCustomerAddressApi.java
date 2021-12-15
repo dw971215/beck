@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Api("用户地址管理")
 @RestController
 @RequestMapping(value = "${apiPath}/customerAddress")
@@ -25,6 +28,20 @@ public class BeckCustomerAddressApi {
 
     @Autowired
     private IBeckCustomerAddressService beckCustomerAddressService;
+
+    @ApiOperation("获取地址信息")
+    @GetMapping("/list")
+    public AjaxResult list(@ApiParam(name = "userId", value = "用户id", required = true) String userId)
+    {
+        if (StringUtils.isBlank(userId)) {
+            return AjaxResult.error("用户id为空");
+        }
+        BeckCustomerAddress beckCustomerAddress = new BeckCustomerAddress();
+        beckCustomerAddress.setUser(new BeckCustomer(userId));
+        List<BeckCustomerAddress> beckCustomerAddresses = new ArrayList<>();
+        beckCustomerAddresses = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
+        return AjaxResult.success(beckCustomerAddresses);
+    }
 
     @ApiOperation("新增/修改地址")
     @GetMapping(value = "/updateAddress")
@@ -67,4 +84,24 @@ public class BeckCustomerAddressApi {
         }
         return AjaxResult.success("修改成功");
     }
+
+    /**
+     * 删除地址
+     * @param id
+     * @return
+     */
+    @ApiOperation("删除地址信息")
+    @GetMapping("/delete")
+    public AjaxResult delete(@ApiParam(name = "id", value = "地址信息id", required = true) String id)
+    {
+        if (StringUtils.isBlank(id)) {
+            return AjaxResult.error("id为空");
+        }
+        int i = beckCustomerAddressService.deleteBeckCustomerAddressById(id);
+        if(i==0){
+            return AjaxResult.error("删除失败");
+        }
+        return AjaxResult.success("删除成功");
+    }
+
 }
