@@ -27,7 +27,7 @@ public class DingTalkApi {
         }
         String appKey = "";
         String appSecret = "";
-        if("1".equals(code)){
+        if("1".equals(appId)){
             appKey = "ding3xro15jth1be8fcs";
             appSecret = "U8XxUZGaBEkc-Uzl9eGD8mEEVoy6iKBJVM2YMS9aL58EEvHTksA3ooCMZt9ZJXgz";
         }
