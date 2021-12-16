@@ -244,6 +244,12 @@
                 <artifactId>beck-business</artifactId>
                 <version>${beck.version}</version>
             </dependency>
+            <!--钉钉模块-->
+            <dependency>
+                <groupId>com.dw</groupId>
+                <artifactId>beck-dingTalk</artifactId>
+                <version>${beck.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

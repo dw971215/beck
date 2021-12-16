@@ -51,6 +51,11 @@
             <groupId>com.dw</groupId>
             <artifactId>beck-business</artifactId>
         </dependency>
+        <!--钉钉模块-->
+        <dependency>
+            <groupId>com.dw</groupId>
+            <artifactId>beck-dingTalk</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

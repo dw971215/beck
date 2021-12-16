@@ -21,5 +21,6 @@
         <module>beck-serial</module>
         <module>beck-weixin</module>
         <module>beck-business</module>
+        <module>beck-dingTalk</module>
     </modules>
 </project>
