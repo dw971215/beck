@@ -1,8 +1,8 @@
-package com.beck.specs.mapper;
+package com.beck.good.specs.mapper;
 
 import java.util.List;
-import com.beck.specs.domain.BeckGoodSpecsCategory;
-import com.beck.specs.domain.BeckGoodSpecsProperty;
+import com.beck.good.specs.domain.BeckGoodSpecsCategory;
+import com.beck.good.specs.domain.BeckGoodSpecsProperty;
 
 /**
  * 商品规格分类Mapper接口
@@ -80,7 +80,7 @@ public interface BeckGoodSpecsCategoryMapper
     /**
      * 批量删除商品规格属性
      * 
-     * @param customerIds 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
     public int deleteBeckGoodSpecsPropertyBySpecsCategoryIds(String[] ids);
@@ -101,4 +101,12 @@ public interface BeckGoodSpecsCategoryMapper
      * @return 结果
      */
     public int deleteBeckGoodSpecsPropertyBySpecsCategoryId(String id);
+
+    /**
+     * 改变规格属性默认标识
+     *
+     * @param beckGoodSpecsProperty 商品规格属性
+     * @return 结果
+     */
+    public int changeStatus(BeckGoodSpecsProperty beckGoodSpecsProperty);
 }

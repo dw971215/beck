@@ -1,18 +1,17 @@
-package com.beck.specs.domain;
+package com.beck.good.category.domain;
 
-import java.util.List;
 import com.beck.common.annotation.Excel;
 import com.beck.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 商品规格分类对象 beck_good_specs_category
+ * 商品分类对象 beck_good_category
  * 
  * @author beck
  * @date 2021-12-10
  */
-public class BeckGoodSpecsCategory extends BaseEntity
+public class BeckGoodCategory extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -26,12 +25,13 @@ public class BeckGoodSpecsCategory extends BaseEntity
     @Excel(name = "类别名称")
     private String name;
 
+    /** 图标地址 */
+    @Excel(name = "图标地址")
+    private String icon;
+
     /** 排序 */
     @Excel(name = "排序")
     private Long sort;
-
-    /** 商品规格属性信息 */
-    private List<BeckGoodSpecsProperty> beckGoodSpecsPropertyList;
 
     public void setId(String id) 
     {
@@ -60,6 +60,15 @@ public class BeckGoodSpecsCategory extends BaseEntity
     {
         return name;
     }
+    public void setIcon(String icon) 
+    {
+        this.icon = icon;
+    }
+
+    public String getIcon() 
+    {
+        return icon;
+    }
     public void setSort(Long sort) 
     {
         this.sort = sort;
@@ -68,16 +77,6 @@ public class BeckGoodSpecsCategory extends BaseEntity
     public Long getSort() 
     {
         return sort;
-    }
-
-    public List<BeckGoodSpecsProperty> getBeckGoodSpecsPropertyList()
-    {
-        return beckGoodSpecsPropertyList;
-    }
-
-    public void setBeckGoodSpecsPropertyList(List<BeckGoodSpecsProperty> beckGoodSpecsPropertyList)
-    {
-        this.beckGoodSpecsPropertyList = beckGoodSpecsPropertyList;
     }
 
     @Override
@@ -91,8 +90,8 @@ public class BeckGoodSpecsCategory extends BaseEntity
             .append("remark", getRemark())
             .append("delFlag", getDelFlag())
             .append("name", getName())
+            .append("icon", getIcon())
             .append("sort", getSort())
-            .append("beckGoodSpecsPropertyList", getBeckGoodSpecsPropertyList())
             .toString();
     }
 }

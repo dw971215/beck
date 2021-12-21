@@ -1,4 +1,4 @@
-package com.beck.specs.service.impl;
+package com.beck.good.specs.service.impl;
 
 import java.util.List;
 import com.beck.common.utils.DateUtils;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import com.beck.common.utils.StringUtils;
 import org.springframework.transaction.annotation.Transactional;
-import com.beck.specs.domain.BeckGoodSpecsProperty;
-import com.beck.specs.mapper.BeckGoodSpecsCategoryMapper;
-import com.beck.specs.domain.BeckGoodSpecsCategory;
-import com.beck.specs.service.IBeckGoodSpecsCategoryService;
+import com.beck.good.specs.domain.BeckGoodSpecsProperty;
+import com.beck.good.specs.mapper.BeckGoodSpecsCategoryMapper;
+import com.beck.good.specs.domain.BeckGoodSpecsCategory;
+import com.beck.good.specs.service.IBeckGoodSpecsCategoryService;
 
 /**
  * 商品规格分类Service业务层处理
@@ -108,6 +108,17 @@ public class BeckGoodSpecsCategoryServiceImpl implements IBeckGoodSpecsCategoryS
     {
         beckGoodSpecsCategoryMapper.deleteBeckGoodSpecsPropertyBySpecsCategoryId(id);
         return beckGoodSpecsCategoryMapper.deleteByLogicBeckGoodSpecsCategoryById(id);
+    }
+
+    /**
+     * 改变规格属性默认标识
+     *
+     * @param beckGoodSpecsProperty 商品规格属性
+     * @return 结果
+     */
+    @Override
+    public int changeStatus(BeckGoodSpecsProperty beckGoodSpecsProperty) {
+        return beckGoodSpecsCategoryMapper.changeStatus(beckGoodSpecsProperty);
     }
 
     /**

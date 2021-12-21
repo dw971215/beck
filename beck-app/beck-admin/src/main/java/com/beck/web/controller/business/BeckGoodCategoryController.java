@@ -17,8 +17,8 @@ import com.beck.common.annotation.Log;
 import com.beck.common.core.controller.BaseController;
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.enums.BusinessType;
-import com.beck.good.domain.BeckGoodCategory;
-import com.beck.good.service.IBeckGoodCategoryService;
+import com.beck.good.category.domain.BeckGoodCategory;
+import com.beck.good.category.service.IBeckGoodCategoryService;
 import com.beck.common.utils.poi.ExcelUtil;
 import com.beck.common.core.page.TableDataInfo;
 

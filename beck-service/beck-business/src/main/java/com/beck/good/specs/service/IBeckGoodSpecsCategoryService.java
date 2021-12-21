@@ -1,7 +1,8 @@
-package com.beck.specs.service;
+package com.beck.good.specs.service;
 
 import java.util.List;
-import com.beck.specs.domain.BeckGoodSpecsCategory;
+import com.beck.good.specs.domain.BeckGoodSpecsCategory;
+import com.beck.good.specs.domain.BeckGoodSpecsProperty;
 
 /**
  * 商品规格分类Service接口
@@ -58,4 +59,12 @@ public interface IBeckGoodSpecsCategoryService
      * @return 结果
      */
     public int deleteBeckGoodSpecsCategoryById(String id);
+
+    /**
+     * 改变规格属性默认标识
+     *
+     * @param beckGoodSpecsProperty 商品规格属性
+     * @return 结果
+     */
+    public int changeStatus(BeckGoodSpecsProperty beckGoodSpecsProperty);
 }

@@ -1,4 +1,4 @@
-package com.beck.specs.domain;
+package com.beck.good.specs.domain;
 
 import com.beck.common.annotation.Excel;
 import com.beck.common.core.domain.BaseEntity;
@@ -30,7 +30,7 @@ public class BeckGoodSpecsProperty extends BaseEntity
     private String code;
 
     /** $column.columnComment */
-    @Excel(name = "规格属性编码")
+    @Excel(name = "是否默认")
     private String isDefault;
 
     /** 排序 */

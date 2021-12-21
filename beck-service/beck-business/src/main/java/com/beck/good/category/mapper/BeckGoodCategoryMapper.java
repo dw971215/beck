@@ -1,7 +1,7 @@
-package com.beck.good.mapper;
+package com.beck.good.category.mapper;
 
 import java.util.List;
-import com.beck.good.domain.BeckGoodCategory;
+import com.beck.good.category.domain.BeckGoodCategory;
 
 /**
  * 商品分类Mapper接口

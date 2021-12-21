@@ -1,12 +1,12 @@
-package com.beck.good.service.impl;
+package com.beck.good.category.service.impl;
 
 import java.util.List;
 import com.beck.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.beck.good.mapper.BeckGoodCategoryMapper;
-import com.beck.good.domain.BeckGoodCategory;
-import com.beck.good.service.IBeckGoodCategoryService;
+import com.beck.good.category.mapper.BeckGoodCategoryMapper;
+import com.beck.good.category.domain.BeckGoodCategory;
+import com.beck.good.category.service.IBeckGoodCategoryService;
 
 /**
  * 商品分类Service业务层处理

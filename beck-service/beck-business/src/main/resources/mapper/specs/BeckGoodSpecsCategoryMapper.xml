@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.beck.specs.mapper.BeckGoodSpecsCategoryMapper">
+<mapper namespace="com.beck.good.specs.mapper.BeckGoodSpecsCategoryMapper">
     
     <resultMap type="BeckGoodSpecsCategory" id="BeckGoodSpecsCategoryResult">
         <result property="id"    column="id"    />
@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
         </where>
+        order by sort asc
     </select>
     
     <select id="selectBeckGoodSpecsCategoryById" parameterType="String" resultMap="BeckGoodSpecsCategoryBeckGoodSpecsPropertyResult">
@@ -52,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from beck_good_specs_category a
         left join beck_good_specs_property b on b.specs_category_id = a.id
         where a.id = #{id}
+        order by b.sort asc
     </select>
         
     <insert id="insertBeckGoodSpecsCategory" parameterType="BeckGoodSpecsCategory">
@@ -124,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <delete id="deleteBeckGoodSpecsPropertyBySpecsCategoryId" parameterType="Long">
+    <delete id="deleteBeckGoodSpecsPropertyBySpecsCategoryId" parameterType="String">
         delete from beck_good_specs_property where specs_category_id = #{specsCategoryId}
     </delete>
 
@@ -134,4 +136,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ( #{item.id}, #{item.createBy}, #{item.createTime}, #{item.updateBy}, #{item.updateTime}, #{item.remark}, #{item.delFlag}, #{item.name}, #{item.code}, #{item.isDefault}, #{item.sort}, #{item.specsCategoryId})
         </foreach>
     </insert>
+
+    <update id="changeStatus" parameterType="BeckGoodSpecsProperty">
+        update beck_good_specs_property
+        <set>
+            <if test="isDefault != null and isDefault != ''">is_default = #{isDefault},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

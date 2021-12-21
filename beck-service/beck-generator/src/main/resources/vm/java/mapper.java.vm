@@ -83,7 +83,7 @@ public interface ${ClassName}Mapper
     /**
      * 批量删除${subTable.functionName}
      * 
-     * @param customerIds 需要删除的数据ID
+     * @param ${pkColumn.javaField} 需要删除的数据ID
      * @return 结果
      */
     public int delete${subClassName}By${subTableFkClassName}s(${pkColumn.javaType}[] ${pkColumn.javaField}s);
