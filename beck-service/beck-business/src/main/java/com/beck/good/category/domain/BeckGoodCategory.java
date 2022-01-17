@@ -79,6 +79,13 @@ public class BeckGoodCategory extends BaseEntity
         return sort;
     }
 
+    public BeckGoodCategory() {
+    }
+
+    public BeckGoodCategory(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)

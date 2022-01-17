@@ -2,7 +2,10 @@ package com.beck.web.controller.business;
 
 import java.util.List;
 
+import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.uuid.UUID;
+import com.beck.good.category.domain.BeckGoodCategory;
+import com.beck.good.goods.domain.BeckGood;
 import com.beck.good.specs.domain.BeckGoodSpecsProperty;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,9 @@ public class BeckGoodSpecsCategoryController extends BaseController
     public TableDataInfo list(BeckGoodSpecsCategory beckGoodSpecsCategory)
     {
         startPage();
+        if (StringUtils.isNotNull(beckGoodSpecsCategory.getParams().get("goodId"))){
+            beckGoodSpecsCategory.setGoodVo(new BeckGood(beckGoodSpecsCategory.getParams().get("goodId").toString()));
+        }
         List<BeckGoodSpecsCategory> list = beckGoodSpecsCategoryService.selectBeckGoodSpecsCategoryList(beckGoodSpecsCategory);
         return getDataTable(list);
     }

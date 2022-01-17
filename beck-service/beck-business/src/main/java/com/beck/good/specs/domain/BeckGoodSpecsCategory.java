@@ -3,6 +3,7 @@ package com.beck.good.specs.domain;
 import java.util.List;
 import com.beck.common.annotation.Excel;
 import com.beck.common.core.domain.BaseEntity;
+import com.beck.good.goods.domain.BeckGood;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -22,13 +23,16 @@ public class BeckGoodSpecsCategory extends BaseEntity
     /** 删除标识 */
     private String delFlag;
 
-    /** 类别名称 */
-    @Excel(name = "类别名称")
+    /** 规格分类名称 */
+    @Excel(name = "规格分类名称")
     private String name;
 
     /** 排序 */
     @Excel(name = "排序")
     private Long sort;
+
+    /** 关联的商品信息 */
+    private BeckGood goodVo;
 
     /** 商品规格属性信息 */
     private List<BeckGoodSpecsProperty> beckGoodSpecsPropertyList;
@@ -80,6 +84,15 @@ public class BeckGoodSpecsCategory extends BaseEntity
         this.beckGoodSpecsPropertyList = beckGoodSpecsPropertyList;
     }
 
+    public BeckGood getGoodVo() {
+        return goodVo;
+    }
+
+    public void setGoodVo(BeckGood goodVo) {
+        this.goodVo = goodVo;
+    }
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -92,6 +105,7 @@ public class BeckGoodSpecsCategory extends BaseEntity
             .append("delFlag", getDelFlag())
             .append("name", getName())
             .append("sort", getSort())
+            .append("goodVo",getGoodVo())
             .append("beckGoodSpecsPropertyList", getBeckGoodSpecsPropertyList())
             .toString();
     }

@@ -21,16 +21,16 @@ public class BeckGoodSpecsProperty extends BaseEntity
     /** 删除标识 */
     private String delFlag;
 
-    /** 类别名称 */
-    @Excel(name = "类别名称")
+    /** 规格属性名称 */
+    @Excel(name = "规格属性名称")
     private String name;
 
     /** 规格属性编码 */
     @Excel(name = "规格属性编码")
     private String code;
 
-    /** $column.columnComment */
-    @Excel(name = "是否默认")
+    /** 是否默认属性 */
+    @Excel(name = "是否默认属性")
     private String isDefault;
 
     /** 排序 */

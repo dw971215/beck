@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="name"    column="name"    />
+        <result property="goodVo.id" column="good_id"></result>
         <result property="sort"    column="sort"    />
     </resultMap>
 
@@ -36,19 +37,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBeckGoodSpecsCategoryVo">
-        select id, create_by, create_time, update_by, update_time, remark, del_flag, name, sort from beck_good_specs_category
+        select id, create_by, create_time, update_by, update_time, remark, del_flag, name, sort, good_id from beck_good_specs_category
     </sql>
 
     <select id="selectBeckGoodSpecsCategoryList" parameterType="BeckGoodSpecsCategory" resultMap="BeckGoodSpecsCategoryResult">
         <include refid="selectBeckGoodSpecsCategoryVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="goodVo != null  and goodVo.id != null and goodVo.id != ''"> and good_id = #{goodVo.id}</if>
         </where>
         order by sort asc
     </select>
     
     <select id="selectBeckGoodSpecsCategoryById" parameterType="String" resultMap="BeckGoodSpecsCategoryBeckGoodSpecsPropertyResult">
-        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.name, a.sort,
+        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.name, a.sort,a.good_id,
             b.id as sub_id, b.create_by as sub_create_by, b.create_time as sub_create_time, b.update_by as sub_update_by, b.update_time as sub_update_time, b.remark as sub_remark, b.del_flag as sub_del_flag, b.name as sub_name, b.code as sub_code, b.is_default as sub_is_default, b.sort as sub_sort, b.specs_category_id as sub_specs_category_id
         from beck_good_specs_category a
         left join beck_good_specs_property b on b.specs_category_id = a.id
@@ -68,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null">del_flag,</if>
             <if test="name != null">name,</if>
             <if test="sort != null">sort,</if>
+            <if test="goodVo != null and goodVo.id != null and goodVo.id!='' ">good_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -79,6 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null">#{delFlag},</if>
             <if test="name != null">#{name},</if>
             <if test="sort != null">#{sort},</if>
+            <if test="goodVo != null and goodVo.id != null and goodVo.id!='' ">#{goodVo.id}</if>
          </trim>
     </insert>
 
@@ -93,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="name != null">name = #{name},</if>
             <if test="sort != null">sort = #{sort},</if>
+            <if test="goodVo != null and goodVo.id != null and goodVo.id!='' ">good_id = #{goodVo.id}</if>
         </trim>
         where id = #{id}
     </update>

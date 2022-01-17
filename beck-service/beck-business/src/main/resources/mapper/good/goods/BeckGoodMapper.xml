@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beck.good.goods.mapper.BeckGoodMapper">
+
+    <resultMap type="BeckGood" id="BeckGoodResult">
+        <result property="id" column="id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="goodsType" column="goods_type"/>
+        <result property="coverImg" column="cover_img"/>
+        <result property="goodDesc" column="good_desc"/>
+        <result property="packCost" column="pack_cost"/>
+        <result property="membershipPrice" column="membership_price"/>
+        <result property="minBuyNum" column="min_buy_num"/>
+        <result property="unitName" column="unit_name"/>
+        <result property="unitValue" column="unit_value"/>
+        <result property="salesNum" column="sales_num"/>
+        <result property="stockNum" column="stock_num"/>
+        <result property="sort" column="sort"/>
+        <result property="goodCategory.id" column="good_category_id"/>
+    </resultMap>
+
+    <sql id="selectBeckGoodVo">
+        select id,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        del_flag,
+        name,
+        price,
+        goods_type,
+        cover_img,
+        good_desc,
+        pack_cost,
+        membership_price,
+        min_buy_num,
+        unit_name,
+        unit_value,
+        sales_num,
+        stock_num,
+        sort,
+        good_category_id
+        from beck_good
+    </sql>
+
+    <select id="selectBeckGoodList" parameterType="BeckGood" resultMap="BeckGoodResult">
+        <include refid="selectBeckGoodVo"/>
+        <where>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="goodsType != null  and goodsType != ''">and goods_type = #{goodsType}</if>
+            <if test="goodCategory != null  and goodCategory.id != null and goodCategory.id != ''">and good_category_id = #{goodCategory.id}</if>
+        </where>
+    </select>
+
+    <select id="selectBeckGoodById" parameterType="String" resultMap="BeckGoodResult">
+        <include refid="selectBeckGoodVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertBeckGood" parameterType="BeckGood">
+        insert into beck_good
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="name != null">name,</if>
+            <if test="price != null">price,</if>
+            <if test="goodsType != null">goods_type,</if>
+            <if test="coverImg != null">cover_img,</if>
+            <if test="goodDesc != null">good_desc,</if>
+            <if test="packCost != null">pack_cost,</if>
+            <if test="membershipPrice != null">membership_price,</if>
+            <if test="minBuyNum != null">min_buy_num,</if>
+            <if test="unitName != null">unit_name,</if>
+            <if test="unitValue != null">unit_value,</if>
+            <if test="salesNum != null">sales_num,</if>
+            <if test="stockNum != null">stock_num,</if>
+            <if test="sort != null">sort,</if>
+            <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">good_category_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="name != null">#{name},</if>
+            <if test="price != null">#{price},</if>
+            <if test="goodsType != null">#{goodsType},</if>
+            <if test="coverImg != null">#{coverImg},</if>
+            <if test="goodDesc != null">#{goodDesc},</if>
+            <if test="packCost != null">#{packCost},</if>
+            <if test="membershipPrice != null">#{membershipPrice},</if>
+            <if test="minBuyNum != null">#{minBuyNum},</if>
+            <if test="unitName != null">#{unitName},</if>
+            <if test="unitValue != null">#{unitValue},</if>
+            <if test="salesNum != null">#{salesNum},</if>
+            <if test="stockNum != null">#{stockNum},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">#{goodCategory.id},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBeckGood" parameterType="BeckGood">
+        update beck_good
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="goodsType != null">goods_type = #{goodsType},</if>
+            <if test="coverImg != null">cover_img = #{coverImg},</if>
+            <if test="goodDesc != null">good_desc = #{goodDesc},</if>
+            <if test="packCost != null">pack_cost = #{packCost},</if>
+            <if test="membershipPrice != null">membership_price = #{membershipPrice},</if>
+            <if test="minBuyNum != null">min_buy_num = #{minBuyNum},</if>
+            <if test="unitName != null">unit_name = #{unitName},</if>
+            <if test="unitValue != null">unit_value = #{unitValue},</if>
+            <if test="salesNum != null">sales_num = #{salesNum},</if>
+            <if test="stockNum != null">stock_num = #{stockNum},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">good_category_id = #{goodCategory.id},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeckGoodById" parameterType="String">
+        delete from beck_good where id = #{id}
+    </delete>
+
+    <update id="deleteByLogicBeckGoodById" parameterType="String">
+      UPDATE beck_good SET del_flag = '1' WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBeckGoodByIds" parameterType="String">
+        delete from beck_good where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="deleteByLogicBeckGoodByIds" parameterType="String">
+        UPDATE beck_good SET del_flag = '1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>

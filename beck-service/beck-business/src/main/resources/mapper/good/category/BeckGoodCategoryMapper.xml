@@ -18,7 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBeckGoodCategoryVo">
-        select id, create_by, create_time, update_by, update_time, remark, del_flag, name, icon, sort from beck_good_category
+        select
+          id,
+          create_by,
+          create_time,
+          update_by,
+          update_time,
+          remark,
+          del_flag,
+          name,
+          icon,
+          sort
+        from beck_good_category
     </sql>
 
     <select id="selectBeckGoodCategoryList" parameterType="BeckGoodCategory" resultMap="BeckGoodCategoryResult">

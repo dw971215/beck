@@ -4,6 +4,9 @@ package ${packageName}.domain;
 import ${import};
 #end
 import com.beck.common.annotation.Excel;
+import com.beck.common.core.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 #if($table.crud || $table.sub)
 #elseif($table.tree)
 #end
