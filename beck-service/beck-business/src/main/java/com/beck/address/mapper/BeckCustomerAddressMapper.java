@@ -71,4 +71,18 @@ public interface BeckCustomerAddressMapper
      * @return
      */
     public int deleteByLogicByIds(String[] ids);
+
+    /**
+     * 根据用户id删除地址信息
+     * @param userId
+     * @return
+     */
+    public int deleteBeckCustomerAddressByUserId(String userId);
+
+    /**
+     * 根据多个用户id删除地址信息
+     * @param ids
+     * @return
+     */
+    public int deleteBeckCustomerAddressByUserIds(String[] ids);
 }

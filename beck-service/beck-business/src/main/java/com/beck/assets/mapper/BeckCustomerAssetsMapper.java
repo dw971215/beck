@@ -72,4 +72,18 @@ public interface BeckCustomerAssetsMapper
      * @return
      */
     public int deleteByLogicByIds(String[] ids);
+
+    /**
+     * 根据用户id删除资产信息
+     * @param userId
+     * @return
+     */
+    public int deleteBeckCustomerAssetsByUserId(String userId);
+
+    /**
+     * 根据多个用户id删除资产信息
+     * @param ids
+     * @return
+     */
+    public int deleteBeckCustomerAssetsByUserIds(String[] ids);
 }

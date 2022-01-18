@@ -1,6 +1,9 @@
 package com.beck.customer.service.impl;
 
 import java.util.List;
+
+import com.beck.address.mapper.BeckCustomerAddressMapper;
+import com.beck.assets.mapper.BeckCustomerAssetsMapper;
 import com.beck.common.utils.DateUtils;
 import com.beck.common.utils.sign.Md5Utils;
 import com.beck.common.utils.uuid.UUID;
@@ -21,6 +24,12 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
 {
     @Autowired
     private BeckCustomerMapper beckCustomerMapper;
+
+    @Autowired
+    private BeckCustomerAddressMapper beckCustomerAddressMapper;
+
+    @Autowired
+    private BeckCustomerAssetsMapper beckCustomerAssetsMapper;
 
     /**
      * 查询用户
@@ -89,6 +98,8 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     @Override
     public int deleteBeckCustomerByIds(String[] ids)
     {
+        beckCustomerAddressMapper.deleteBeckCustomerAddressByUserIds(ids);
+        beckCustomerAssetsMapper.deleteBeckCustomerAssetsByUserIds(ids);
         return beckCustomerMapper.deleteByLogicByIds(ids);
     }
 
@@ -101,6 +112,8 @@ public class BeckCustomerServiceImpl implements IBeckCustomerService
     @Override
     public int deleteBeckCustomerById(String id)
     {
+        beckCustomerAddressMapper.deleteBeckCustomerAddressByUserId(id);
+        beckCustomerAssetsMapper.deleteBeckCustomerAssetsByUserId(id);
         return beckCustomerMapper.deleteByLogicById(id);
     }
 }

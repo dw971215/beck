@@ -60,15 +60,17 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
     public AjaxResult wxAppletAutoLogin(@ApiParam(name = "code",value = "临时授权code",required = true) String code,
                                         @ApiParam(name = "iv",value = "加密算法的初始向量",required = true) String iv,
                                         @ApiParam(name = "encryptedData",value = "包括敏感数据在内的完整用户信息的加密数据",required = true) String encryptedData){
-        JSONObject sessionKeyOrOpenId = OauthApi.getSessionKeyOrOpenId(weiXinConfig.getWxAppletAppId(), weiXinConfig.getWxAppletAppSecret(), code);
+        JSONObject sessionKeyOrOpenId = OauthApi.getSessionKeyOrOpenId(weiXinConfig.getWxFarmAppletAppId(), weiXinConfig.getWxFarmAppletAppSecret(), code);
         String openid = sessionKeyOrOpenId.getString("openid");
         if(StringUtils.isBlank(openid)){
-            return AjaxResult.error("获取用户信息失败");
+            return AjaxResult.error("授权失败");
         }
         BeckCustomer res = new BeckCustomer();
         try {
             JSONObject  userInfo = WXUtlis.dencryptedUserData(encryptedData, sessionKeyOrOpenId.getString("session_key"), iv);
             //查询是否存在用户
+            //获取手机号码
+            String phoneNumber = userInfo.getString("phoneNumber");
             BeckCustomer beckCustomer = customerService.selectBeckCustomerByOpenId(openid);
             if(beckCustomer == null){
                 //没有该用户信息 创建一个用户
@@ -81,6 +83,7 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 insertCustom.setNickName(userInfo.getString("nickName"));
                 insertCustom.setGender(userInfo.getString("gender"));
                 insertCustom.setWxOpenid(openid);
+                insertCustom.setMobile(phoneNumber);
                 insertCustom.setCustomerSource("1");
                 customerService.insertBeckCustomer(insertCustom);
                 //创建完成后给用户插入一条资产记录
@@ -97,19 +100,14 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
             }else{
                 beckCustomer.setNickName(userInfo.getString("nickName"));
                 beckCustomer.setLoginPhoto(userInfo.getString("avatarUrl"));
+                beckCustomer.setMobile(phoneNumber);
                 customerService.updateBeckCustomer(beckCustomer);
-                //获取用户地址
-//                BeckCustomerAddress beckCustomerAddress = new BeckCustomerAddress();
-//                beckCustomerAddress.setUser(new BeckCustomer(beckCustomer.getId()));
-//                List<BeckCustomerAddress> beckCustomerAddresses = new ArrayList<>();
-//                beckCustomerAddresses = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
-//                beckCustomer.setBeckCustomerAddresses(beckCustomerAddresses);
                 res = beckCustomer;
             }
             logger.info("userInfo message:"+userInfo.toJSONString());
         } catch (Exception e) {
             e.printStackTrace();
-            return AjaxResult.error("登录失败");
+            return AjaxResult.error("授权失败");
         }
 
         return AjaxResult.success(res);

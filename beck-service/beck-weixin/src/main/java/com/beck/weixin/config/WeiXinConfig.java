@@ -44,6 +44,12 @@ public class WeiXinConfig {
     @Value("${wxApplet.AppSecret}")
     private String WxAppletAppSecret;
 
+    @Value("${wxApplet.farmAppId}")
+    private String WxFarmAppletAppId;
+
+    @Value("${wxApplet.farmAppSecret}")
+    private String WxFarmAppletAppSecret;
+
     public String getAppID() {
         return AppID;
     }
@@ -74,5 +80,13 @@ public class WeiXinConfig {
 
     public String getWxAppletAppSecret() {
         return WxAppletAppSecret;
+    }
+
+    public String getWxFarmAppletAppId() {
+        return WxFarmAppletAppId;
+    }
+
+    public String getWxFarmAppletAppSecret() {
+        return WxFarmAppletAppSecret;
     }
 }

@@ -12,8 +12,12 @@ valit:
   token: dw971215
 #维信小程序接入
 wxApplet:
+  #随笔记小程序
   AppId: wx9c352a6148d7753d
   AppSecret: 5dba8fb15a504e75bd8c8247af5b8971
+  #农场的小程序
+  farmAppId: wx982bb78530a52a38
+  farmAppSecret: 141f5e3a0605e89a718bd4c5fa921e2c
 
 
 

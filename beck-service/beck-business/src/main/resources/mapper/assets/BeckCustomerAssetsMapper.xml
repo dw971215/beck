@@ -142,4 +142,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <delete id="deleteBeckCustomerAssetsByUserId" parameterType="String">
+       UPDATE beck_customer_assets SET
+			del_flag = '1'
+		WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteBeckCustomerAssetsByUserIds" parameterType="String">
+        UPDATE beck_customer_assets SET
+        del_flag = '1' where user_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
