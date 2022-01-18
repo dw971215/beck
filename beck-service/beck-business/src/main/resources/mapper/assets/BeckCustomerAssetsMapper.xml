@@ -58,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="currentValue != null "> and a.current_value = #{currentValue}</if>
             <if test="delFlag != null  and delFlag != ''"> and a.del_flag = #{delFlag}</if>
             <if test="memberLevel != null "> and a.member_level = #{memberLevel}</if>
+            <if test="user != null and user.nickName != null and user.nickName !='' "> and b.nick_name like concat('%',#{user.nickName},'%') </if>
         </where>
     </select>
     

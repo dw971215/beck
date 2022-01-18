@@ -2,6 +2,7 @@ package com.beck.web.controller.business;
 
 import java.util.List;
 
+import com.beck.common.core.domain.entity.SysDept;
 import com.beck.common.utils.sign.Md5Utils;
 import com.beck.common.utils.uuid.UUID;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,6 +48,17 @@ public class BeckCustomerController extends BaseController
         List<BeckCustomer> list = beckCustomerService.selectBeckCustomerList(beckCustomer);
         return getDataTable(list);
     }
+
+    /**
+     * 获取用户下拉树列表
+     */
+    @GetMapping("/treeselect")
+    public AjaxResult treeselect(BeckCustomer beckCustomer)
+    {
+        List<BeckCustomer> list = beckCustomerService.selectBeckCustomerList(beckCustomer);
+        return AjaxResult.success(list);
+    }
+
 
     /**
      * 导出用户列表

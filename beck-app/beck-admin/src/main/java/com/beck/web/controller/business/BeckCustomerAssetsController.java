@@ -2,7 +2,9 @@ package com.beck.web.controller.business;
 
 import java.util.List;
 
+import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.uuid.UUID;
+import com.beck.customer.domain.BeckCustomer;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +45,12 @@ public class BeckCustomerAssetsController extends BaseController
     public TableDataInfo list(BeckCustomerAssets beckCustomerAssets)
     {
         startPage();
+        String nickName = beckCustomerAssets.getParams().get("nickName").toString();
+        if (StringUtils.isNotNull(nickName)){
+            BeckCustomer beckCustomer = new BeckCustomer();
+            beckCustomer.setNickName(nickName);
+            beckCustomerAssets.setUser(beckCustomer);
+        }
         List<BeckCustomerAssets> list = beckCustomerAssetsService.selectBeckCustomerAssetsList(beckCustomerAssets);
         return getDataTable(list);
     }

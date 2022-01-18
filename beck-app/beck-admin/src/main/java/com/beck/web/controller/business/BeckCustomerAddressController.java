@@ -3,6 +3,9 @@ package com.beck.web.controller.business;
 import java.util.List;
 import java.util.UUID;
 
+import com.beck.common.utils.StringUtils;
+import com.beck.customer.domain.BeckCustomer;
+import com.beck.good.category.domain.BeckGoodCategory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,9 @@ public class BeckCustomerAddressController extends BaseController
     public TableDataInfo list(BeckCustomerAddress beckCustomerAddress)
     {
         startPage();
+        if (StringUtils.isNotNull(beckCustomerAddress.getParams().get("userId"))){
+            beckCustomerAddress.setUser(new BeckCustomer(beckCustomerAddress.getParams().get("userId").toString()));
+        }
         List<BeckCustomerAddress> list = beckCustomerAddressService.selectBeckCustomerAddressList(beckCustomerAddress);
         return getDataTable(list);
     }
