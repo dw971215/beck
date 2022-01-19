@@ -2,7 +2,7 @@ package com.beck.serial.utils;
 
 import com.beck.common.utils.spring.SpringUtils;
 import com.beck.serial.core.SerialPortCore;
-import com.beck.serial.core.SerialReaderReceived;
+import com.beck.serial.core.SerialReaderCore;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,7 +26,7 @@ public class SerialPortUtils {
      * @param serialReader 接收消息的处理类
      * @throws Exception
      */
-    public static String sendMsg(String msg, SerialReaderReceived serialReader) throws Exception {
+    public static String sendMsg(String msg, SerialReaderCore serialReader) throws Exception {
         // 创建连接
         serialPortCore.connect(SerialPortCore.serialPortName,serialReader);
         // 线程休眠
@@ -41,7 +41,7 @@ public class SerialPortUtils {
      * @param serialReader 接收消息的处理类
      * @throws Exception
      */
-    public static void connect(SerialReaderReceived serialReader) throws Exception {
+    public static void connect(SerialReaderCore serialReader) throws Exception {
         // 创建连接
         serialPortCore.connect(SerialPortCore.serialPortName,serialReader);
         // 线程休眠

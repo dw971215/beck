@@ -1,18 +1,21 @@
-package com.beck.serial.domain;
+package com.beck.serial.core;
 
 import com.beck.common.utils.sign.Encodes;
-import com.beck.serial.core.SerialReaderCore;
 import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 串口监听返回信息监听类实现
  * @Author dawei
- * @Date 2021/1/27 21:47
+ * @Date 2021/1/27 21:15
  */
-public class LedSerailPortReceived extends SerialReaderCore {
-
+public class SerialReaderCore implements SerialPortEventListener {
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
     private InputStream in;
     private byte[] buffer = new byte[1024];
 
@@ -29,11 +32,10 @@ public class LedSerailPortReceived extends SerialReaderCore {
                 }
                 buffer[len++] = (byte) data;
             }
-           String receivedStr = Encodes.bytesToHexString(buffer,len);
 //                System.out.println("来自串口的消息：-->"+new String(buffer,0,len));
-            System.out.println("串口用16进制返回的消息：-->"+ receivedStr);
+            logger.info("来自串口的消息：-->"+ Encodes.bytesToHexString(buffer,len));
         } catch ( IOException e ) {
-            System.out.println("获取串口信息失败-->");
+            logger.info("获取串口信息失败-->");
 //                System.exit(-1);
         }
     }

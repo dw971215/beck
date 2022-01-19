@@ -1,24 +1,17 @@
-package com.beck.weixin.core;
+package com.beck.dingTalk.core;
 
 import com.beck.common.core.redis.RedisCache;
 import com.beck.common.utils.spring.SpringUtils;
-import com.beck.weixin.config.WeiXinConfig;
 
 /**
- * 通用的类 属性 集中地
+ * 钉钉模块所有基本工具
  * @Author dawei
  * @Date 2021/9/3 16:14
  */
 
-public class WXBaseCore {
+public class DingTalkCore {
     /**
      * 获取redis缓存
      */
     public static RedisCache redisCache = SpringUtils.getBean(RedisCache.class);
-
-
-    /**
-     * 微信配置类
-     */
-    public static WeiXinConfig weiXinConfig = SpringUtils.getBean(WeiXinConfig.class);
 }

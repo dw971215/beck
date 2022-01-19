@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beck.user.assets.mapper.BeckCustomerAssetsMapper">
+    
+    <resultMap type="BeckCustomerAssets" id="BeckCustomerAssetsResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="pointNum"    column="point_num"    />
+        <result property="balance"    column="balance"    />
+        <result property="currentValue"    column="current_value"    />
+        <result property="memberLevel"    column="member_level"    />
+    </resultMap>
+
+    <resultMap id="CustomerMap" type="BeckCustomerAssets" extends="BeckCustomerAssetsResult">
+        <result property="user.id"    column="user_id"  />
+        <result property="user.nickName"    column="nick_name"  />
+        <result property="user.realName"    column="real_name"  />
+    </resultMap>
+
+    <sql id="tableJoins">
+        LEFT JOIN beck_customer b on b.id = a.user_id
+    </sql>
+
+    <sql id="selectBeckCustomerAssetsVo">
+        select
+        a.id,
+        a.create_by,
+        a.create_time,
+        a.update_by,
+        a.update_time,
+        a.remark,
+        a.del_flag,
+        a.user_id,
+        a.point_num,
+        a.balance,
+        a.current_value,
+        a.member_level,
+        b.nick_name,
+        b.real_name
+        from beck_customer_assets a
+    </sql>
+
+    <select id="selectBeckCustomerAssetsList" parameterType="BeckCustomerAssets" resultMap="CustomerMap">
+        <include refid="selectBeckCustomerAssetsVo"/>
+        <include refid="tableJoins"/>
+        <where>  
+            <if test="user != null and  user.id !=null and user.id != ''"> and a.user_id = #{user.id}</if>
+            <if test="pointNum != null "> and a.point_num = #{pointNum}</if>
+            <if test="balance != null "> and a.balance = #{balance}</if>
+            <if test="currentValue != null "> and a.current_value = #{currentValue}</if>
+            <if test="currentValue != null "> and a.current_value = #{currentValue}</if>
+            <if test="delFlag != null  and delFlag != ''"> and a.del_flag = #{delFlag}</if>
+            <if test="memberLevel != null "> and a.member_level = #{memberLevel}</if>
+            <if test="user != null and user.nickName != null and user.nickName !='' "> and b.nick_name like concat('%',#{user.nickName},'%') </if>
+        </where>
+    </select>
+    
+    <select id="selectBeckCustomerAssetsById" parameterType="String" resultMap="CustomerMap">
+        <include refid="selectBeckCustomerAssetsVo"/>
+        <include refid="tableJoins"/>
+        where a.id = #{id}
+    </select>
+        
+    <insert id="insertBeckCustomerAssets" parameterType="BeckCustomerAssets">
+        insert into beck_customer_assets
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="user!= null and user.id != null">user_id,</if>
+            <if test="pointNum != null">point_num,</if>
+            <if test="balance != null">balance,</if>
+            <if test="currentValue != null">current_value,</if>
+            <if test="memberLevel != null">member_level,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="user!= null and user.id != null">#{user.id},</if>
+            <if test="pointNum != null">#{pointNum},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="currentValue != null">#{currentValue},</if>
+            <if test="memberLevel != null">#{memberLevel},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBeckCustomerAssets" parameterType="BeckCustomerAssets">
+        update beck_customer_assets
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="user!= null and user.id != null">user_id = #{user.id},</if>
+            <if test="pointNum != null">point_num = #{pointNum},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="currentValue != null">current_value = #{currentValue},</if>
+            <if test="memberLevel != null">member_level = #{memberLevel},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeckCustomerAssetsById" parameterType="String">
+        delete from beck_customer_assets where id = #{id}
+    </delete>
+
+    <delete id="deleteBeckCustomerAssetsByIds" parameterType="String">
+        delete from beck_customer_assets where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByLogicById" parameterType="String">
+       UPDATE beck_customer_assets SET
+			del_flag = '1'
+		WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByLogicByIds" parameterType="String">
+        UPDATE beck_customer_assets SET
+        del_flag = '1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteBeckCustomerAssetsByUserId" parameterType="String">
+       UPDATE beck_customer_assets SET
+			del_flag = '1'
+		WHERE user_id = #{userId}
+    </delete>
+
+    <delete id="deleteBeckCustomerAssetsByUserIds" parameterType="String">
+        UPDATE beck_customer_assets SET
+        del_flag = '1' where user_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

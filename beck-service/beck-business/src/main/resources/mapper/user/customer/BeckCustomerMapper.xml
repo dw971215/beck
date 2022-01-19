@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beck.user.customer.mapper.BeckCustomerMapper">
+    
+    <resultMap type="BeckCustomer" id="BeckCustomerResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="loginName"    column="login_name"    />
+        <result property="loginPassword"    column="login_password"    />
+        <result property="loginPhoto"    column="login_photo"    />
+        <result property="realName"    column="real_name"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="wxOpenid"    column="wx_openid"    />
+        <result property="customerSource"    column="customer_source" />
+        <result property="birthday"    column="birthday" />
+    </resultMap>
+
+    <resultMap type="BeckCustomer" id="BeckCustomerAndAssetsResult" extends="BeckCustomerResult">
+        <result property="beckCustomerAssets.id"    column="bid"    />
+        <result property="beckCustomerAssets.createBy"    column="bcreate_by"    />
+        <result property="beckCustomerAssets.createTime"    column="bcreate_time"    />
+        <result property="beckCustomerAssets.updateBy"    column="bupdate_by"    />
+        <result property="beckCustomerAssets.updateTime"    column="bupdate_time"    />
+        <result property="beckCustomerAssets.remark"    column="bremark"    />
+        <result property="beckCustomerAssets.delFlag"    column="bdel_flag"    />
+        <result property="beckCustomerAssets.pointNum"    column="point_num"    />
+        <result property="beckCustomerAssets.balance"    column="balance"    />
+        <result property="beckCustomerAssets.currentValue"    column="current_value"    />
+        <result property="beckCustomerAssets.memberLevel"    column="member_level"    />
+    </resultMap>
+
+    <sql id="selectBeckCustomerVo">
+        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.login_name, a.login_password, a.login_photo, a.nick_name, a.mobile, a.wx_openid
+        ,a.customer_source,
+        a.birthday,
+        a.real_name,
+        a.gender,
+        b.id as bid,
+        b.create_by as bcreate_by,
+        b.create_time as bcreate_time,
+        b.update_by as bupdate_by,
+        b.update_time as bupdate_time,
+        b.remark as bremark,
+        b.del_flag as bdel_flag,
+        b.point_num,
+        b.balance,
+        b.current_value,
+        b.member_level
+        from beck_customer a
+    </sql>
+
+    <sql id="tableJoins">
+        LEFT JOIN beck_customer_assets b on b.user_id = a.id
+    </sql>
+
+    <select id="selectBeckCustomerList" parameterType="BeckCustomer" resultMap="BeckCustomerAndAssetsResult">
+        <include refid="selectBeckCustomerVo"/>
+        <include refid="tableJoins"/>
+        <where>  
+            <if test="loginName != null  and loginName != ''"> and a.login_name like concat('%', #{loginName}, '%')</if>
+            <if test="loginPassword != null  and loginPassword != ''"> and a.login_password = #{loginPassword}</if>
+            <if test="loginPhoto != null  and loginPhoto != ''"> and a.login_photo = #{loginPhoto}</if>
+            <if test="nickName != null  and nickName != ''"> and a.nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="mobile != null  and mobile != ''"> and a.mobile = #{mobile}</if>
+            <if test="wxOpenid != null  and wxOpenid != ''"> and a.wx_openid = #{wxOpenid}</if>
+            <if test="delFlag != null  and delFlag != ''"> and a.del_flag = #{delFlag}</if>
+            <if test="customerSource != null  and customerSource != ''"> and a.customer_source = #{customerSource}</if>
+            <if test="realName != null  and realName != ''"> and a.real_name = #{realName}</if>
+            <if test="gender != null  and gender != ''"> and a.gender = #{gender}</if>
+
+        </where>
+    </select>
+    
+    <select id="selectBeckCustomerById" parameterType="String" resultMap="BeckCustomerAndAssetsResult">
+        <include refid="selectBeckCustomerVo"/>
+        <include refid="tableJoins"/>
+        where a.id = #{id}
+    </select>
+
+    <select id="selectBeckCustomerByOpenId" parameterType="String" resultMap="BeckCustomerAndAssetsResult">
+        <include refid="selectBeckCustomerVo"/>
+        <include refid="tableJoins"/>
+        where a.wx_openid = #{openid} and a.del_flag = '0'
+    </select>
+        
+    <insert id="insertBeckCustomer" parameterType="BeckCustomer">
+        insert into beck_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="loginName != null">login_name,</if>
+            <if test="loginPassword != null">login_password,</if>
+            <if test="loginPhoto != null">login_photo,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="mobile != null">mobile,</if>
+            <if test="wxOpenid != null">wx_openid,</if>
+            <if test="customerSource != null">customer_source,</if>
+            <if test="realName != null">real_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="birthday != null">birthday,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="loginName != null">#{loginName},</if>
+            <if test="loginPassword != null">#{loginPassword},</if>
+            <if test="loginPhoto != null">#{loginPhoto},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="mobile != null">#{mobile},</if>
+            <if test="wxOpenid != null">#{wxOpenid},</if>
+            <if test="customerSource != null">#{customerSource},</if>
+            <if test="realName != null">#{realName},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="birthday != null">#{birthday},</if>
+
+         </trim>
+    </insert>
+
+    <update id="updateBeckCustomer" parameterType="BeckCustomer">
+        update beck_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="loginName != null">login_name = #{loginName},</if>
+            <if test="loginPassword != null">login_password = #{loginPassword},</if>
+            <if test="loginPhoto != null">login_photo = #{loginPhoto},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="wxOpenid != null">wx_openid = #{wxOpenid},</if>
+            <if test="customerSource != null">customer_source = #{customerSource},</if>
+            <if test="realName != null">real_name = #{realName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBeckCustomerById" parameterType="String">
+        delete from beck_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteBeckCustomerByIds" parameterType="String">
+        delete from beck_customer where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByLogicById" parameterType="String">
+       UPDATE beck_customer SET
+			del_flag = '1'
+		WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByLogicByIds" parameterType="String">
+        UPDATE beck_customer SET
+        del_flag = '1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

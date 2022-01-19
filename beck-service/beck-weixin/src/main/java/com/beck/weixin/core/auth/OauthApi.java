@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.http.HttpUtils;
 import com.beck.weixin.constant.WXApiUrlConstant;
-import com.beck.weixin.constant.WXRedisConstant;
+import com.beck.weixin.constant.WXConstant;
 import com.beck.weixin.core.WXBaseCore;
 import com.beck.weixin.error.WXErrCode;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 微信授权获取工具
+ * 微信授权API
  * @Author dawei
  * @Date 2021/9/2 17:39
  */
@@ -31,8 +31,8 @@ public class OauthApi extends WXBaseCore {
      */
     public static synchronized String getAccessToken(String appId, String appSecret) {
 
-        if (redisCache.hasKey(WXRedisConstant.ACCESS_TOKEN_KEY + appId)) {
-            return redisCache.getCacheObject(WXRedisConstant.ACCESS_TOKEN_KEY + appId);
+        if (redisCache.hasKey(WXConstant.ACCESS_TOKEN_KEY + appId)) {
+            return redisCache.getCacheObject(WXConstant.ACCESS_TOKEN_KEY + appId);
         }
         StringBuilder params = new StringBuilder();
         params.append("grant_type=client_credential");
@@ -43,8 +43,8 @@ public class OauthApi extends WXBaseCore {
         String access_token = TokenResult.getString("access_token");
         if (StringUtils.isNotBlank(access_token)) {
             logger.info("获取access_token成功");
-            redisCache.setCacheObject(WXRedisConstant.ACCESS_TOKEN_KEY + appId, access_token,
-                    WXRedisConstant.ACCESS_TOKEN_EXPIRE, TimeUnit.MINUTES);
+            redisCache.setCacheObject(WXConstant.ACCESS_TOKEN_KEY + appId, access_token,
+                    10, TimeUnit.MINUTES);
             return TokenResult.getString("access_token");
         }
         String errMsg = WXErrCode.WXErrMsg(TokenResult);
@@ -60,8 +60,8 @@ public class OauthApi extends WXBaseCore {
      * @return
      */
     public static synchronized String getUserInfo(String appId, String appSecret, String code) {
-        if (redisCache.hasKey(WXRedisConstant.WEB_ACCESS_TOKEN_KEY + appId)) {
-            Object cacheObject = redisCache.getCacheObject(WXRedisConstant.WEB_ACCESS_TOKEN_KEY + appId);
+        if (redisCache.hasKey(WXConstant.WEB_ACCESS_TOKEN_KEY + appId)) {
+            Object cacheObject = redisCache.getCacheObject(WXConstant.WEB_ACCESS_TOKEN_KEY + appId);
             JSONObject parse = JSONObject.parseObject(cacheObject.toString());
             //TODO 刷新access_token 待开发 目前的access_token只支持2个小时
             String userInfo = getUserInfo(parse.getString("access_token"), parse.getString("openid"));
@@ -76,8 +76,8 @@ public class OauthApi extends WXBaseCore {
         JSONObject TokenResult = JSONObject.parseObject(result);
         String access_token = TokenResult.getString("access_token");
         if (StringUtils.isNotBlank(access_token)) {
-            redisCache.setCacheObject(WXRedisConstant.WEB_ACCESS_TOKEN_KEY + appId, result,
-                    WXRedisConstant.WEB_ACCESS_TOKEN_EXPIRE, TimeUnit.MINUTES);
+            redisCache.setCacheObject(WXConstant.WEB_ACCESS_TOKEN_KEY + appId, result,
+                    10, TimeUnit.MINUTES);
             String userInfo = getUserInfo(access_token, TokenResult.getString("openid"));
             return userInfo;
         }

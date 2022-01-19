@@ -1,16 +1,14 @@
 package com.beck.weixin.login;
 
 import com.alibaba.fastjson.JSONObject;
-import com.beck.address.domain.BeckCustomerAddress;
-import com.beck.address.service.IBeckCustomerAddressService;
-import com.beck.assets.domain.BeckCustomerAssets;
-import com.beck.assets.service.IBeckCustomerAssetsService;
+import com.beck.user.assets.domain.BeckCustomerAssets;
+import com.beck.user.assets.service.IBeckCustomerAssetsService;
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.sign.Md5Utils;
 import com.beck.common.utils.uuid.UUID;
-import com.beck.customer.domain.BeckCustomer;
-import com.beck.customer.service.IBeckCustomerService;
+import com.beck.user.customer.domain.BeckCustomer;
+import com.beck.user.customer.service.IBeckCustomerService;
 import com.beck.weixin.core.WeiXinBaseApi;
 import com.beck.weixin.core.auth.OauthApi;
 import com.beck.weixin.utils.WXUtlis;
@@ -21,8 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**

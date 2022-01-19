@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.beck.common.utils.StringUtils;
 import com.beck.common.utils.uuid.UUID;
-import com.beck.customer.domain.BeckCustomer;
+import com.beck.user.customer.domain.BeckCustomer;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +19,8 @@ import com.beck.common.annotation.Log;
 import com.beck.common.core.controller.BaseController;
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.enums.BusinessType;
-import com.beck.assets.domain.BeckCustomerAssets;
-import com.beck.assets.service.IBeckCustomerAssetsService;
+import com.beck.user.assets.domain.BeckCustomerAssets;
+import com.beck.user.assets.service.IBeckCustomerAssetsService;
 import com.beck.common.utils.poi.ExcelUtil;
 import com.beck.common.core.page.TableDataInfo;
 

@@ -10,14 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class WXApiUrlConstant {
 
-
     /**
      * 微信请求获取基本token地址
      */
     public final static String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
 
     /**
-     * 微信二维码生成地址
+     * 微信公众号二维码生成地址
      */
     public final static String CREATE_QRCODE_URL = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=";
 

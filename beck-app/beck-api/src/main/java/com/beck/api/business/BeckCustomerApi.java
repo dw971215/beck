@@ -1,12 +1,12 @@
 package com.beck.api.business;
 
-import com.beck.address.domain.BeckCustomerAddress;
-import com.beck.address.service.IBeckCustomerAddressService;
+import com.beck.user.address.domain.BeckCustomerAddress;
+import com.beck.user.address.service.IBeckCustomerAddressService;
 import com.beck.common.core.domain.AjaxResult;
 import com.beck.common.utils.DateUtils;
 import com.beck.common.utils.StringUtils;
-import com.beck.customer.domain.BeckCustomer;
-import com.beck.customer.service.IBeckCustomerService;
+import com.beck.user.customer.domain.BeckCustomer;
+import com.beck.user.customer.service.IBeckCustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,24 +1,15 @@
 package com.beck.weixin.utils.sign;
 
-import com.beck.common.utils.spring.SpringUtils;
-import com.beck.weixin.config.WeiXinConfig;
-import com.beck.weixin.constant.WXEncryConstant;
-import com.beck.weixin.utils.WXStringUtil;
-import com.beck.weixin.utils.digest.DigestUtil;
+import com.beck.weixin.constant.WXConstant;
+import com.beck.weixin.core.WXBaseCore;
 
 import java.util.Arrays;
-
 /**
  * 签名验证
  * @Author dawei
  * @Date 2021/9/5 14:33
  */
-public class SignUtil {
-
-    /**
-     * 微信配置类
-     */
-    public static WeiXinConfig weiXinConfig = SpringUtils.getBean(WeiXinConfig.class);
+public class SignUtil extends WXBaseCore {
 
     /**
      * 微信开发者接入验证签名
@@ -38,9 +29,23 @@ public class SignUtil {
         String[] params = {TOKRN,timestamp,nonce};
         Arrays.sort(params);
         //排序后字符串
-        String str = WXStringUtil.arryToString(params);
+        String str = arryToString(params);
         //本地加密后的字符串
-        String encode = DigestUtil.encode(WXEncryConstant.SHA1, str);
+        String encode = DigestUtil.encode(WXConstant.SHA1, str);
         return encode != null ? encode.equals(signature) : false;
+    }
+
+    /**
+     * 数组转字符串
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public static <T> String arryToString(T[] t){
+        StringBuilder sr = new StringBuilder();
+        for (T s : t) {
+            sr.append(s);
+        }
+        return sr.toString();
     }
 }

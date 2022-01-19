@@ -1,6 +1,6 @@
 package com.beck.serial.domain;
 
-import com.beck.serial.core.SerialReaderReceived;
+import com.beck.serial.core.SerialReaderCore;
 import gnu.io.SerialPortEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.io.InputStream;
  * @Author dawei
  * @Date 2021/2/25 8:54
  */
-public class ZigBeePortReceived extends SerialReaderReceived {
+public class ZigBeePortReceived extends SerialReaderCore {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private InputStream in;

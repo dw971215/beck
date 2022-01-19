@@ -109,7 +109,7 @@ public class SerialPortCore {
      * COM3
      * @throws Exception
      */
-    public void connect (String portName, SerialReaderReceived serialReader) throws Exception {
+    public void connect (String portName, SerialReaderCore serialReader) throws Exception {
         //判断serialPort是否为空
         if(serialPort!=null){
             logger.info("已经连接端口-->"+portName);
