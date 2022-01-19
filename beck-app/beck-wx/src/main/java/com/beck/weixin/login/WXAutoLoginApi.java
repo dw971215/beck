@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 微信自动授权获取用户信息接口
@@ -60,14 +61,27 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
     public AjaxResult wxAppletAutoLogin(@ApiParam(name = "code",value = "临时授权code",required = true) String code,
                                         @ApiParam(name = "iv",value = "加密算法的初始向量",required = true) String iv,
                                         @ApiParam(name = "encryptedData",value = "包括敏感数据在内的完整用户信息的加密数据",required = true) String encryptedData){
-        JSONObject sessionKeyOrOpenId = OauthApi.getSessionKeyOrOpenId(weiXinConfig.getWxFarmAppletAppId(), weiXinConfig.getWxFarmAppletAppSecret(), code);
+        JSONObject sessionKeyOrOpenId = new JSONObject();
+        String rd_sessionId = ""; //自定义登录态的键值
+        if(code.startsWith("authorized_")){
+            //session 没有过期
+            sessionKeyOrOpenId = redisCache.getCacheObject("wx:loginSession:"+code);
+            if(sessionKeyOrOpenId == null){
+                return AjaxResult.error("授权失败");
+            }
+        }else{
+            //登录过期 传code刷新登录态 获取加密的session 和openid
+            sessionKeyOrOpenId = OauthApi.getSessionKeyOrOpenId(weiXinConfig.getWxFarmAppletAppId(), weiXinConfig.getWxFarmAppletAppSecret(), code);
+            rd_sessionId = UUID.randomUUID().toString().replaceAll("-","");
+            redisCache.setCacheObject("wx:loginSession:authorized_"+rd_sessionId,sessionKeyOrOpenId,15, TimeUnit.DAYS);
+        }
         String openid = sessionKeyOrOpenId.getString("openid");
         if(StringUtils.isBlank(openid)){
             return AjaxResult.error("授权失败");
         }
         BeckCustomer res = new BeckCustomer();
         try {
-            JSONObject  userInfo = WXUtlis.dencryptedUserData(encryptedData, sessionKeyOrOpenId.getString("session_key"), iv);
+            JSONObject  userInfo = WXUtlis.dencryptedUserData( sessionKeyOrOpenId.getString("session_key"),encryptedData, iv);
             //查询是否存在用户
             //获取手机号码
             String phoneNumber = userInfo.getString("phoneNumber");
@@ -104,12 +118,12 @@ public class WXAutoLoginApi extends WeiXinBaseApi {
                 customerService.updateBeckCustomer(beckCustomer);
                 res = beckCustomer;
             }
-            logger.info("userInfo message:"+userInfo.toJSONString());
         } catch (Exception e) {
             e.printStackTrace();
             return AjaxResult.error("授权失败");
         }
-
+        //返回自定义登录态键值
+        res.getParams().put("authorized_",rd_sessionId);
         return AjaxResult.success(res);
     }
 

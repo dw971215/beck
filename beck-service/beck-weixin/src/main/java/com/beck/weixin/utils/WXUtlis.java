@@ -24,7 +24,7 @@ public class WXUtlis {
      * @param iv
      * @return
      */
-    public static JSONObject dencryptedUserData(String encryptedData, String sessionKey, String iv) throws Exception{
+    public static JSONObject dencryptedUserData(String sessionKey,String encryptedData, String iv) throws Exception{
         JSONObject res = new JSONObject();
         // 被加密的数据
         byte[] dataByte = Base64.decode(encryptedData);
