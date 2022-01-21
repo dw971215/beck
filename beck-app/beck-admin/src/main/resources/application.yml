@@ -86,7 +86,7 @@ spring:
         max-idle: 8
         # 连接池的最大数据库连接数
         max-active: 8
-        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        # #连接池最大阻塞等待时间 max-wait: -1ms（使用负值表示没有限制）
         max-wait: -1ms
 
 # token配置
