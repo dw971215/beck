@@ -25,10 +25,10 @@ public class WeiXinConfig {
     @Value("${weixin.AppSecret}")
     private String AppSecret;
 
-    @Value("${test.AppID}")
+    @Value("${weixin.TestAppId}")
     private String testAppID;
 
-    @Value("${test.AppSecret}")
+    @Value("${weixin.TestAppSecret}")
     private String testAppSecret;
 
     @Value("${valit.url}")

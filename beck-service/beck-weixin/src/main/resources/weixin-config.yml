@@ -1,15 +1,14 @@
-# 微信所有的配置参数
+# 微信公众号所有的配置参数
 weixin:
   AppID: wxb3330aeb5d89663a
   AppSecret: 9ec256358d3ba69475012957d794587b
-#测试公众号信息
-test:
-  AppID: wxd1da3a447f4f190f
-  AppSecret: b1f8f5c644f0d410e2dc389ef4695b64
+  #测试公众号参数
+  TestAppId: wxd1da3a447f4f190f
+  TestAppSecret: b1f8f5c644f0d410e2dc389ef4695b64
 #验证微信消息真实性开发者接入
 valit:
   url: /weiXinServer/developAccess
-  token: dw971215
+  token: dawei@2021
 #维信小程序接入
 wxApplet:
   #随笔记小程序
