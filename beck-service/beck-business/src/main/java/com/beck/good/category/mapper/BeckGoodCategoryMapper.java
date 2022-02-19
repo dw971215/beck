@@ -28,6 +28,12 @@ public interface BeckGoodCategoryMapper
     public List<BeckGoodCategory> selectBeckGoodCategoryList(BeckGoodCategory beckGoodCategory);
 
     /**
+     * 查询商品分类及旗下所有数据
+     * @param beckGoodCategory
+     * @return
+     */
+    public List<BeckGoodCategory> selectBeckGoodCategoryListNew(BeckGoodCategory beckGoodCategory);
+    /**
      * 新增商品分类
      * 
      * @param beckGoodCategory 商品分类

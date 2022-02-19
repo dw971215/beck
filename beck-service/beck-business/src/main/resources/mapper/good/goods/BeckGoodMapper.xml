@@ -25,6 +25,7 @@
         <result property="salesNum" column="sales_num"/>
         <result property="stockNum" column="stock_num"/>
         <result property="sort" column="sort"/>
+        <result property="useProperty" column="use_property" />
         <result property="goodCategory.id" column="good_category_id"/>
     </resultMap>
 
@@ -49,6 +50,7 @@
         sales_num,
         stock_num,
         sort,
+        use_property,
         good_category_id
         from beck_good
     </sql>
@@ -58,6 +60,7 @@
         <where>
             <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
             <if test="goodsType != null  and goodsType != ''">and goods_type = #{goodsType}</if>
+            <if test="useProperty != null  and useProperty != ''">and use_property = #{useProperty}</if>
             <if test="goodCategory != null  and goodCategory.id != null and goodCategory.id != ''">and good_category_id = #{goodCategory.id}</if>
         </where>
     </select>
@@ -90,6 +93,7 @@
             <if test="salesNum != null">sales_num,</if>
             <if test="stockNum != null">stock_num,</if>
             <if test="sort != null">sort,</if>
+            <if test="useProperty != null">use_property,</if>
             <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">good_category_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -113,6 +117,7 @@
             <if test="salesNum != null">#{salesNum},</if>
             <if test="stockNum != null">#{stockNum},</if>
             <if test="sort != null">#{sort},</if>
+            <if test="useProperty != null">#{useProperty},</if>
             <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">#{goodCategory.id},</if>
         </trim>
     </insert>
@@ -139,6 +144,7 @@
             <if test="salesNum != null">sales_num = #{salesNum},</if>
             <if test="stockNum != null">stock_num = #{stockNum},</if>
             <if test="sort != null">sort = #{sort},</if>
+            <if test="useProperty != null">use_property = #{useProperty},</if>
             <if test="goodCategory != null and goodCategory.id !=null and goodCategory.id !='' ">good_category_id = #{goodCategory.id},</if>
         </trim>
         where id = #{id}

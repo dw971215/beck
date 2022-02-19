@@ -17,6 +17,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sort"    column="sort"    />
     </resultMap>
 
+    <resultMap id="BeckGoodCategoryGoodPropertyResult" type="BeckGoodCategory" extends="BeckGoodCategoryResult">
+        <collection property="goodsList" notNullColumn="sub_id" javaType="java.util.List" resultMap="BeckGoodPropertyResult" />
+    </resultMap>
+
+    <resultMap type="BeckGood" id="BeckGoodPropertyResult">
+        <result property="id"    column="sub_id"    />
+        <result property="createBy"    column="sub_create_by"    />
+        <result property="createTime"    column="sub_create_time"    />
+        <result property="updateBy"    column="sub_update_by"    />
+        <result property="updateTime"    column="sub_update_time"    />
+        <result property="remark"    column="sub_remark"    />
+        <result property="delFlag"    column="sub_del_flag"    />
+        <result property="name"    column="sub_name"    />
+        <result property="price" column="sub_price"/>
+        <result property="goodsType" column="sub_goods_type"/>
+        <result property="coverImg" column="sub_cover_img"/>
+        <result property="goodDesc" column="sub_good_desc"/>
+        <result property="packCost" column="sub_pack_cost"/>
+        <result property="membershipPrice" column="sub_membership_price"/>
+        <result property="minBuyNum" column="sub_min_buy_num"/>
+        <result property="unitName" column="sub_unit_name"/>
+        <result property="unitValue" column="sub_unit_value"/>
+        <result property="salesNum" column="sub_sales_num"/>
+        <result property="stockNum" column="sub_stock_num"/>
+        <result property="sort" column="sub_sort"/>
+        <result property="useProperty" column="sub_use_property"/>
+        <result property="goodCategory.id" column="sub_good_category_id"/>
+    </resultMap>
+
     <sql id="selectBeckGoodCategoryVo">
         select
           id,
@@ -42,6 +71,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectBeckGoodCategoryById" parameterType="String" resultMap="BeckGoodCategoryResult">
         <include refid="selectBeckGoodCategoryVo"/>
         where id = #{id}
+    </select>
+
+    <select id="selectBeckGoodCategoryListNew" parameterType="BeckGoodCategory" resultMap="BeckGoodCategoryGoodPropertyResult">
+        select a.id, a.create_by, a.create_time, a.update_by, a.update_time, a.remark, a.del_flag, a.name,a.icon,a.sort,
+          b.id as sub_id, b.create_by as sub_create_by, b.create_time as sub_create_time, b.update_by as sub_update_by, b.update_time as sub_update_time, b.remark as sub_remark, b.del_flag as sub_del_flag, b.name as sub_name,
+          b.price as sub_price,
+          b.goods_type as sub_goods_type,
+          b.cover_img as sub_cover_img,
+          b.good_desc as sub_good_desc,
+          b.pack_cost as sub_pack_cost,
+          b.membership_price as sub_membership_price,
+          b.min_buy_num as sub_min_buy_num,
+          b.unit_name as sub_unit_name,
+          b.unit_value as sub_unit_value,
+          b.sales_num as sub_sales_num,
+          b.stock_num as sub_stock_num,
+          b.sort as sub_sort,
+          b.use_property as sub_use_property,
+          b.good_category_id as sub_good_category_id
+        from beck_good_category a
+        left join beck_good b on b.good_category_id = a.id
+        order by a.sort asc
     </select>
         
     <insert id="insertBeckGoodCategory" parameterType="BeckGoodCategory">

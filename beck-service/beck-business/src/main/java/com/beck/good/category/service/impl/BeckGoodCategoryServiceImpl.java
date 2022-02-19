@@ -46,6 +46,18 @@ public class BeckGoodCategoryServiceImpl implements IBeckGoodCategoryService
     }
 
     /**
+     * 查询商品分类列表
+     *
+     * @param beckGoodCategory 商品分类
+     * @return 商品分类
+     */
+    @Override
+    public List<BeckGoodCategory> selectBeckGoodCategoryListNew(BeckGoodCategory beckGoodCategory)
+    {
+        beckGoodCategory.setDelFlag("0");
+        return beckGoodCategoryMapper.selectBeckGoodCategoryListNew(beckGoodCategory);
+    }
+    /**
      * 新增商品分类
      * 
      * @param beckGoodCategory 商品分类

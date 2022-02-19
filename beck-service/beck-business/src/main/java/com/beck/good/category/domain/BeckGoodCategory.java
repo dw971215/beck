@@ -2,8 +2,12 @@ package com.beck.good.category.domain;
 
 import com.beck.common.annotation.Excel;
 import com.beck.common.core.domain.BaseEntity;
+import com.beck.good.goods.domain.BeckGood;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.List;
 
 /**
  * 商品分类对象 beck_good_category
@@ -32,6 +36,12 @@ public class BeckGoodCategory extends BaseEntity
     /** 排序 */
     @Excel(name = "排序")
     private Long sort;
+
+    /**
+     * 分类商品信息明细
+     */
+    @JsonProperty(value = "goods_list")
+    private List<BeckGood> goodsList;
 
     public void setId(String id) 
     {
@@ -84,6 +94,14 @@ public class BeckGoodCategory extends BaseEntity
 
     public BeckGoodCategory(String id) {
         this.id = id;
+    }
+
+    public List<BeckGood> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<BeckGood> goodsList) {
+        this.goodsList = goodsList;
     }
 
     @Override

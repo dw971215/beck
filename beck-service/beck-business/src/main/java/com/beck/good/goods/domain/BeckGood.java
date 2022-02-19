@@ -75,6 +75,9 @@ public class BeckGood extends BaseEntity
     @Excel(name = "排序")
     private Long sort;
 
+    /*是否存在规格属性*/
+    private String useProperty;
+
     /** 商品分类id */
     @Excel(name = "商品分类实体")
     private BeckGoodCategory goodCategory;
@@ -228,6 +231,14 @@ public class BeckGood extends BaseEntity
 
     public void setGoodCategory(BeckGoodCategory goodCategory) {
         this.goodCategory = goodCategory;
+    }
+
+    public String getUseProperty() {
+        return useProperty;
+    }
+
+    public void setUseProperty(String useProperty) {
+        this.useProperty = useProperty;
     }
 
     @Override

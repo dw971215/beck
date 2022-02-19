@@ -27,6 +27,14 @@ public interface IBeckGoodCategoryService
      */
     public List<BeckGoodCategory> selectBeckGoodCategoryList(BeckGoodCategory beckGoodCategory);
 
+
+    /**
+     * 查询商品分类列表
+     *
+     * @param beckGoodCategory 商品分类
+     * @return 商品分类集合
+     */
+    public List<BeckGoodCategory> selectBeckGoodCategoryListNew(BeckGoodCategory beckGoodCategory);
     /**
      * 新增商品分类
      * 
